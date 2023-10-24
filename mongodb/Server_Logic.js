@@ -725,12 +725,12 @@ const createComplaint = async (req, res) => {
   //     </body>
   //   </html>
   // `,
-          attachments: [
-            {
-              filename: req.body.agentId + '_' + agent.firstName + '.jpeg',
-              path: 'tempImage.jpeg', // Path to the temporary image file
-            },
-          ],
+          // attachments: [
+          //   {
+          //     filename: req.body.agentId + '_' + agent.firstName + '.jpeg',
+          //     path: 'tempImage.jpeg', // Path to the temporary image file
+          //   },
+          // ],
       
         };
 
