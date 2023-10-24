@@ -704,7 +704,7 @@ const createComplaint = async (req, res) => {
           return res.status(404).json({ error: 'Agent not found' });
       }
 
-      await borderedImage.writeAsync('tempImage.jpeg');
+      // await borderedImage.writeAsync('tempImage.jpeg');
 
       // Send an email to the customer
       const customerMailOptions = {
