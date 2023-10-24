@@ -8,7 +8,7 @@ const Server=require("./mongodb/Server_Logic")
 app.use(bodyParser.json());
 app.use(express.json());
 // app.use(cors());
-const allowedOrigin = 'https://frontend-qrcode-i3zx.vercel.app';
+const allowedOrigin = 'https://frontend-qrcode-i3zx-pfgbvslup-barnbas-projects.vercel.app';
 
 const corsOptions = {
   origin: allowedOrigin,
