@@ -7,8 +7,16 @@ const dotenv = require("dotenv").config();
 const Server=require("./mongodb/Server_Logic")
 app.use(bodyParser.json());
 app.use(express.json());
-app.use(cors());
+// app.use(cors());
+const allowedOrigin = 'https://frontend-qrcode-i3zx.vercel.app';
 
+const corsOptions = {
+  origin: allowedOrigin,
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  optionsSuccessStatus: 204,
+};
+
+app.use(cors(corsOptions));
 
 
 const port = process.env.PORT;
