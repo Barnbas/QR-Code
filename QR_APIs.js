@@ -8,17 +8,15 @@ const Server=require("./mongodb/Server_Logic")
 app.use(bodyParser.json());
 app.use(express.json());
 app.use(cors());
-const allowedOrigin = 'https://frontend-qrcode-i3zx-pfgbvslup-barnbas-projects.vercel.app';
+// const allowedOrigin = 'https://frontend-qrcode-i3zx-pfgbvslup-barnbas-projects.vercel.app';
 
-const corsOptions = {
-  origin: allowedOrigin,
-  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-  optionsSuccessStatus: 204,
-  allowedHeaders: ["Content-Type", "Authorization"], // Include any additional headers your application uses
+// const corsOptions = {
+//   origin: allowedOrigin,
+//   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+//   optionsSuccessStatus: 204,
+// };
 
-};
-
-app.use(cors(corsOptions));
+// app.use(cors(corsOptions));
 
 
 const port = process.env.PORT;
@@ -131,10 +129,7 @@ app.get('/getcustomerById/:customerId', (req, res) => {
 
  //Complaints
  //Complaints post with sending mails 
- app.options("/complaints", cors(corsOptions)); // Handle preflight request
-
- app.post("/complaints", cors(corsOptions), (req, res) => {
-
+ app.post('/complaints',(req,res)=>{
   Server.createComplaint(req,res,()=>
   {}); 
   // console.log(res,"line 63");
