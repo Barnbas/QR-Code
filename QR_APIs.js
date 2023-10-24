@@ -27,6 +27,14 @@ mongoose
     console.log(error);
   });
 
+//Reg
+app.post('/Registration', (req, res) => {
+  Server.registerPost(req, res, () => { });
+})
+//login
+app.post('/login', (req, res) => {
+  Server.UserLogin(req, res, () => { });
+})
 
 
 //Agent  
@@ -137,8 +145,17 @@ app.get('/getAllComplaints', (req, res) => {
 });
 
 
+//Otp
+app.post('/sendotp',(req,res)=>{
+  Server.sendotp(req,res,()=>
+  {}); 
+}) 
 
-
+//verify
+app.post('/Verifyotp',(req,res)=>{
+  Server.Verifyotp(req,res,()=>
+  {}); 
+}) 
 
 
 
@@ -161,9 +178,10 @@ app.get('/sendotp/:empId/:email', (req, res) => {
 
 
 
-
-
-
+//geting agentdata based on otp verification
+// app.post('/optpost', (req, res) => {
+//   Server.fetchAgentData(req, res, () => {});
+// });
 
 
  

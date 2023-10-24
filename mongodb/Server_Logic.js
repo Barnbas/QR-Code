@@ -1,9 +1,15 @@
 const Employee = require('./models/Employee_Collection');
 const Certificate = require('./models/certificate'); // Import the certificate schema
 const CustomerInfo = require('./models/customerInfoCollection');
+const Registration = require('./models/Registraction');
+const jwt = require("jsonwebtoken");
+const jwtSecret = 'babi ';
+const otpGenerator = require('otp-generator'); // You may need to install this package
 
+const base64Img = require('base64-img');
 // Import the Complaint model
 const Complaint = require('./models/Complaints'); // Assuming your model is in a separate file
+const Jimp = require('jimp');
 
 const { v4: uuidv4 } = require('uuid');
 const QRCode = require('qrcode');
@@ -23,15 +29,161 @@ const storage = multer.diskStorage({
 
 // Create a multer instance with the defined storage
 const upload = multer({ storage: storage });
-let currentAgent = 2000; // Initialize the current order number
 
-const generateAgentId = () => {
-  currentAgent++; // Increment the order number
-  return `CM${currentAgent}`; // Generate the ordered ID
+
+
+
+
+
+let currentagent = 4000; // Initialize the current agent number
+let currentCustomer = 2000; // Initialize the current customer number
+
+const getNextEmpIDagent = async () => {
+    while (true) {
+        const candidateId = `AG${currentagent}`;
+        const existingAgent = await Registration.findOne({ Emp_ID: candidateId });
+        if (!existingAgent) {
+            currentagent++;
+            return candidateId;
+        }
+        currentagent++;
+    }
 };
+
+const getNextEmpIDcus = async () => {
+    while (true) {
+        const candidateId = `CM${currentCustomer}`;
+        const existingCustomer = await Registration.findOne({ Emp_ID: candidateId });
+        if (!existingCustomer) {
+            currentCustomer++;
+            return candidateId;
+        }
+        currentCustomer++;
+    }
+};
+
+const registerPost = async (req, res) => {
+    try {
+        const { First_name, Last_name, Role, Email, Phone, Password } = req.body;
+
+        if (!First_name || !Last_name || !Role || !Email || !Phone || !Password) {
+            throw new Error("All fields (First_name, Last_name, Role, Email, Phone, and Password) are required.");
+        }
+
+        const existingUser = await Registration.findOne({ Email });
+        const existingPhoneNumber = await Registration.findOne({ Phone });
+        if (existingUser) {
+            return res.status(400).json({
+                message: "This Email is already registered. Please use a different email.",
+            });
+        }
+        if (existingPhoneNumber) {
+            return res.status(400).json({
+                message: "This phone number is already registered. Please use a different phone number.",
+            });
+        }
+
+        let Emp_ID;
+        if (Role === 'Agent') {
+            Emp_ID = await getNextEmpIDagent();
+        } else if (Role === 'Customer') {
+            Emp_ID = await getNextEmpIDcus();
+        }
+
+        const newUserRegistration = new Registration({
+            First_name,
+            Last_name,
+            Role,
+            Email,
+            Phone,
+            Password,
+            Emp_ID,
+        });
+
+        await newUserRegistration.save();
+
+        res.status(201).json({
+            message: "User Successfully Registered...! Now You Can Login",
+        });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({
+            message: "Error occurred while registering user",
+            error: error.message,
+        });
+    }
+};
+
+
+
+//Login
+const UserLogin = async (req, res) => {
+  const { password, empId } = req.body;
+
+  if (!password || !empId) {
+      return res.status(400).json({ error: 'Password and empId are required.' });
+  }
+
+  try {
+      const user = await Employee.findOne({ empId });
+
+      if (!user) {
+          return res.status(401).json({ error: 'Invalid credentials.' });
+      }
+
+      if (user.password !== password) {
+          return res.status(401).json({ error: 'Invalid credentials.' });
+      }
+
+      const token = jwt.sign(
+          {
+              id: user._id,
+              First_name: user.firstName,
+              Last_name: user.lastName,
+              Phone: user.phone,
+              Email: user.email,
+              Role: user.role,
+              empId: user.empId
+          },
+          jwtSecret,
+          { expiresIn: '1h' }
+      );
+
+      res.status(200).json({ message: 'Authentication successful.', token });
+  } catch (error) {
+      console.error('Error checking user:', error);
+      res.status(500).json({ error: 'An error occurred while checking user.' });
+  }
+}
+
+
+
+
+
+
+
+let currentAgent = 2000; // Initialize the current agent number
+
+const generateAgentId = async () => {
+  while (true) {
+    const candidateId = `CM${currentAgent}`;
+    // Check if an agent with this ID already exists in the database
+    const existingAgent = await Employee.findOne({ empId: candidateId });
+
+    if (!existingAgent) {
+      // If no agent with this ID exists, return the ID
+      currentAgent++;
+      return candidateId;
+    }
+
+    // If the ID already exists, increment currentAgent and try again
+    currentAgent++;
+  }
+};
+
 const createAgent = async (req, res) => {
   try {
-    const empId = generateAgentId();
+    const empId = await generateAgentId();
 
     const Agent = {
       empId,
@@ -52,7 +204,7 @@ const createAgent = async (req, res) => {
       serviceType: req.body.serviceType,
       workExperience: req.body.workExperience,
       qrCode: req.body.qrCode,
-      certification: req.body.certification || [], // Use the provided certification array or an empty array if not provided
+      certifications: req.body.certifications || [], // Use the provided certification array or an empty array if not provided
     };
 
     const newEmployee = new Employee(Agent);
@@ -265,18 +417,31 @@ const createCertificate = async (req, res) => {
 
   // customerInfoController.js
   let currentOrder = 3000; // Initialize the current order number
-
-const generateOrderedId = () => {
-  currentOrder++; // Increment the order number
-  return `CU${currentOrder}`; // Generate the ordered ID
-};
+  const generateOrderedId = async () => {
+    while (true) {
+      const candidateId = `CU${currentOrder}`;
+      // Check if a customer with this ID already exists in the database
+      const existingCustomer = await CustomerInfo.findOne({ customerId: candidateId });
+      
+      if (!existingCustomer) {
+        // If no customer with this ID exists, return the ID
+        currentOrder++;
+        return candidateId;
+      }
+  
+      // If the ID already exists, increment currentOrder and try again
+      currentOrder++;
+    }
+  };
+  
   const createCustomer = async (req, res) => {
     try {
       // Generate a unique customerId
-      const customerId = generateOrderedId();
+      const customerId = await generateOrderedId(); // Add "await" here
+  
       const currentDate = new Date();
       const utcDate = currentDate.toISOString();
-
+  
       // Construct the customer data
       const customerData = {
         customerId, // Automatically generated customerId
@@ -284,12 +449,13 @@ const generateOrderedId = () => {
         lastName: req.body.lastName,
         phone: req.body.phone,
         email: req.body.email,
-        type: req.body.type,
+        serviceType: req.body.type,
         date: utcDate, // Automatically captures the current date and time in UTC format
         description: req.body.description,
         status: req.body.status,
-        address:req.body.address,
+        address: req.body.address,
       };
+  
       const newCustomer = new CustomerInfo(customerData);
       await newCustomer.save(); // Save the new customer document to the database
       res.status(201).json(newCustomer);
@@ -298,6 +464,7 @@ const generateOrderedId = () => {
       res.status(500).json({ error: 'Internal Server Error' });
     }
   };
+  
   
   const getAllCustomers = async (req, res) => {
     try {
@@ -308,6 +475,7 @@ const generateOrderedId = () => {
       res.status(500).json({ error: 'Internal Server Error' });
     }
   };
+
   const updateCustomerStatus = async (customerId, status) => {
     try {
       const updatedCustomer = await CustomerInfo.findOneAndUpdate(
@@ -461,21 +629,63 @@ const transporter = nodemailer.createTransport({
 
 let complaintdataId = 4000; // Initialize the current complaint ID
 
-const generateComplaintId = () => {
-  complaintdataId++; // Increment the complaint ID
-  return `CM${complaintdataId}`; // Generate the complaint ID
-};
+const generateComplaintId = async () => {
+  while (true) {
+    const candidateId = `CM${complaintdataId}`;
+    // Check if a complaint with this ID already exists in the database
+    const existingComplaint = await Complaint.findOne({ complaintId: candidateId });
+    
+    if (!existingComplaint) {
+      // If no complaint with this ID exists, return the ID
+      complaintdataId++;
+      return candidateId;
+    }
 
+    // If the ID already exists, increment complaintdataId and try again
+    complaintdataId++;
+  }
+};
 const createComplaint = async (req, res) => {
+  // console.log("470",req.body);
+  // const base64Url = req.body.agentQr;
+  const base64Data = req.body.agentQr;
+  const borderWidth = 5; // Desired border size in pixels
+
+  let borderedImage; // Define borderedImage at a higher scope
+
   try {
-    const complaintId = generateComplaintId();
+    const image = await Jimp.read(Buffer.from(base64Data.split('base64,')[1], 'base64'));
+    const imageWidth = image.bitmap.width;
+    const imageHeight = image.bitmap.height;
+    
+    // Calculate new dimensions for the bordered image
+    const newWidth = imageWidth + 2 * borderWidth;
+    const newHeight = imageHeight + 2 * borderWidth;
+
+    // Create a new image with a white background
+    borderedImage = new Jimp(newWidth, newHeight, 0xffffffff);
+
+    // Calculate the position to paste the original image
+    const xOffset = borderWidth;
+    const yOffset = borderWidth;
+
+    // Resize the original image to fit within the border
+    image.resize(imageWidth + borderWidth, imageHeight + borderWidth);
+
+    // Paste the original image onto the bordered image
+    borderedImage.composite(image, xOffset, yOffset);
+  } catch (error) {
+    console.error('Error processing image:', error);
+    return res.status(500).json({ error: 'Internal Server Error' });
+  }
+  try {
+    const complaintId = await generateComplaintId();
 
     const complaintData = {
       complaintId,
       customerId: req.body.customerId,
       agentId: req.body.agentId,
     };
-
 
       const newComplaint = new Complaint(complaintData);
       await newComplaint.save(); // Save the new complaint document to the database
@@ -494,12 +704,33 @@ const createComplaint = async (req, res) => {
           return res.status(404).json({ error: 'Agent not found' });
       }
 
+      await borderedImage.writeAsync('tempImage.jpeg');
+
       // Send an email to the customer
       const customerMailOptions = {
           from: 'barnbastelagareddy123@gmail.com',
           to: customer.email, // Assuming you have an 'email' field in the customer document
           subject: 'Complaint Created',
-          text: `Hi ${customer.firstName}, your complaint has been successfully created. It has been assigned to ${agent.firstName}  ${agent.lastName}.Thank you for reaching out!`,
+          html: `
+    <html>
+      <body style="font-family: Arial, sans-serif; background-color: #f2f2f2; margin: 0; padding: 0;">
+        <div style="background-color: #007bff; color: #fff; padding: 20px; text-align: center;">
+          <h1 style="font-size: 24px;">Welcome, ${customer.firstName}!</h1>
+        </div>
+        <div style="background-color: #fff; padding: 20px;">
+          <p style="font-size: 16px;">Your complaint has been successfully created. It has been assigned to ${agent.firstName} ${agent.lastName}.</p>
+          <p style="font-size: 16px;">Thank you for reaching out!</p>
+        </div>
+      </body>
+    </html>
+  `,
+          attachments: [
+            {
+              filename: req.body.agentId + '_' + agent.firstName + '.jpeg',
+              path: 'tempImage.jpeg', // Path to the temporary image file
+            },
+          ],
+      
         };
 
       // Send an email to the agent
@@ -528,5 +759,188 @@ const createComplaint = async (req, res) => {
 };
 
 
+const otpStorage = {};
 
-module.exports = {getAllComplaints,getComplaintData,getcustomerById,getComplaints,getComplaintById,getAllEmployeesByID,createComplaint,getAllEmployeesByServiceType,sendingOtp,createAgent,createCertificate ,getAllCertificates ,getAllEmployees ,createCustomer,getAllEmployeesWithQR,getAllCustomers,updateCustomerStatus};
+const sendotp = async (req, res) => {
+  const { email } = req.body;
+
+  // Ensure that the email is valid before proceeding
+  if (!isValidEmail(email)) {
+    return res.status(400).json({ error: 'Invalid email address' });
+  }
+
+  // Generate a random 6-digit OTP
+  const otp = otpGenerator.generate(6, { upperCase: false, specialChars: false });
+
+  // Store the OTP associated with the email for later verification
+  otpStorage[email] = otp;
+
+  const mailOptions = {
+    from: 'barnbastelagareddy123@gmail.com',
+    to: email,
+    subject: 'OTP for Verification',
+    text: `Your OTP is: ${otp}`,
+  };
+
+  transporter.sendMail(mailOptions, (error) => {
+    if (error) {
+      console.error('Error sending OTP:', error);
+      res.status(500).json({ error: 'Failed to send OTP' });
+    } else {
+      console.log('OTP sent successfully');
+      res.status(200).json({ message: 'OTP sent successfully' });
+    }
+  });
+};
+
+
+const Verifyotp = async (req, res) => {
+  const { email, otp } = req.body;
+
+  if (otpStorage[email] && otpStorage[email] === otp) {
+    // If the provided OTP matches the stored OTP for the email, it's verified.
+    res.status(200).json({ message: 'OTP verified successfully' });
+  } else {
+    res.status(400).json({ error: 'Invalid OTP' });
+  }
+};
+
+function isValidEmail(email) {
+  // You can implement a more robust email validation here if needed
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+
+
+
+
+
+
+
+
+// const otpStore = {};
+
+
+
+// const createComplaint = async (req, res) => {
+//   // console.log("470",req.body);
+//   const base64Url = req.body.agentQr;
+//    console.log(base64Url);
+ 
+//   try {
+//     const complaintId = generateComplaintId();
+
+//     const complaintData = {
+//       complaintId,
+//       customerId: req.body.customerId,
+//       agentId: req.body.agentId,
+//     };
+
+
+//       const newComplaint = new Complaint(complaintData);
+//       await newComplaint.save(); // Save the new complaint document to the database
+
+//       // Fetch customer data based on customerId
+//       const customer = await CustomerInfo.findOne({ customerId: req.body.customerId });
+
+//       if (!customer) {
+//           return res.status(404).json({ error: 'Customer not found' });
+//       }
+//       const generatedOTP = generateRandomOTP();
+//       otpStore[req.body.customerId] = generatedOTP;
+//       // Fetch agent data based on agentId
+//       const agent = await Employee.findOne({ empId: req.body.agentId });
+
+//       if (!agent) {
+//           return res.status(404).json({ error: 'Agent not found' });
+//       }
+//       var buffer = Buffer.from(base64Url.split("base64,")[1], "base64");
+//       // Send an email to the customer
+//       const customerMailOptions = {
+//           from: 'barnbastelagareddy123@gmail.com',
+//           to: customer.email, // Assuming you have an 'email' field in the customer document
+//           subject: 'Complaint Created',
+//           html: `<h1>Welcome ${customer.firstName}</h1>
+//           <p>your complaint has been successfully created. It has been assigned to' ${agent.firstName}  ${agent.lastName}'.Thank you for reaching out!'</p>
+//           <p>Use this OTP for verification: ${generatedOTP}</p>`,
+//           attachments: [
+//             {
+//               filename: req.body.agentId+'_'+agent.firstName+'.jpeg', // Name of the attachment
+//               content: buffer, // Base64-encoded image data
+//               encoding: 'base64', // Specify the encoding
+//             },
+//           ],
+  
+//         };
+
+//       // Send an email to the agent
+//       const agentMailOptions = {
+//           from: 'barnbastelagareddy123@gmail.com',
+//           to: agent.email, // Assuming you have an 'email' field in the agent document
+//           subject: 'New Complaint Assigned',
+//           text: `Hi ${agent.firstName}, a new complaint has been assigned to you. It belongs to ${customer.firstName}  ${customer.lastName}. Please take action accordingly.`,
+//         };
+
+//       transporter.sendMail(customerMailOptions, (customerError) => {
+//           if (customerError) {
+//               console.error('Error sending email to customer:', customerError);
+//           }
+//           transporter.sendMail(agentMailOptions, (agentError) => {
+//               if (agentError) {
+//                   console.error('Error sending email to agent:', agentError);
+//               }
+//               res.status(201).json({ complaint: newComplaint, customer, agent });
+//           });
+//       });
+//   } catch (error) {
+//       console.error('Error creating complaint:', error);
+//       res.status(500).json({ error: 'Internal Server Error' });
+//   }
+// };
+// function generateRandomOTP() {
+//   return Math.floor(1000 + Math.random() * 9000).toString();
+// }
+
+
+// const verifyOTP = (submittedOTP, generatedOTP) => {
+//   if (submittedOTP === generatedOTP) {
+//     return true; // OTP is correct
+//   }
+//   return false; // Incorrect OTP
+// };
+
+// const fetchAgentData = (req, res) => {
+//   const submittedOTP = req.body.otp; // OTP submitted by the customer
+//   const customerId = req.body.customerId; // Customer ID
+
+//   // Retrieve the stored OTP
+//   const generatedOTP = otpStore[customerId];
+
+//   if (!generatedOTP) {
+//     return res.status(401).json({ error: 'OTP not found' });
+//   }
+
+//   if (verifyOTP(submittedOTP, generatedOTP)) {
+//     // OTP is correct, proceed to fetch agent data
+//     // Fetch agent data based on agentId
+
+//     // Updated Mongoose query to fetch agent by empId
+//     Employee.findOne({ empId: req.body.agentId })
+//       .exec()
+//       .then((agent) => {
+//         if (!agent) {
+//           return res.status(404).json({ error: 'Agent not found' });
+//         }
+//         // Send response with agent data
+//         res.status(200).json({ agent });
+//       })
+//       .catch((err) => {
+//         console.error('Error fetching agent data:', err);
+//         res.status(500).json({ error: 'Internal Server Error' });
+//       });
+//   } else {
+//     // Incorrect OTP
+//     res.status(401).json({ error: 'Invalid OTP' });
+//   }
+// };
+
+module.exports = {Verifyotp,sendotp,UserLogin,registerPost,getAllComplaints,getComplaintData,getcustomerById,getComplaints,getComplaintById,getAllEmployeesByID,createComplaint,getAllEmployeesByServiceType,sendingOtp,createAgent,createCertificate ,getAllCertificates ,getAllEmployees ,createCustomer,getAllEmployeesWithQR,getAllCustomers,updateCustomerStatus};

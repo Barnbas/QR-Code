@@ -7,7 +7,7 @@ const customerInfoSchema = new mongoose.Schema({
   lastName: String,
   phone: String,
   email: String,
-  type: String,
+  serviceType: String,
   date: Date,
   description: String,
   status: String,
