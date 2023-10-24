@@ -6,14 +6,14 @@ const cors = require("cors");
 const dotenv = require("dotenv").config();
 const Server=require("./mongodb/Server_Logic")
 app.use(bodyParser.json());
-app.use(cors());
+app.use(express.json());
+
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', 'https://frontend-qrcode-i3zx.vercel.app');
   res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
   res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
   next();
 });
-app.use(express.json());
 
 const port = process.env.PORT;
 
@@ -51,13 +51,16 @@ app.post('/login', (req, res) => {
 
  //All Agents get
  app.get('/getAgents',(req,res)=>{
+
   Server.getAllEmployees(req,res,()=>
   {}); 
 }) 
 
 // get agent by id
 app.get('/getAgents/:empId', (req, res) => {
+  
   Server.getAllEmployeesByID(req, res, () => {});
+  console.log(res,"line 63");
 });
 
 //get agent by servicetype
@@ -125,6 +128,7 @@ app.get('/getcustomerById/:customerId', (req, res) => {
  app.post('/complaints',(req,res)=>{
   Server.createComplaint(req,res,()=>
   {}); 
+  console.log(res,"line 63");
 })
 //complaints get
 app.get('/getcomplents', (req, res) => {
