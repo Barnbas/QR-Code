@@ -130,6 +130,8 @@ app.get('/getcustomerById/:customerId', (req, res) => {
  //Complaints
  //Complaints post with sending mails 
  app.post('/complaints',(req,res)=>{
+  res.header("Access-Control-Allow-Origin", allowedOrigin);
+
   Server.createComplaint(req,res,()=>
   {}); 
   // console.log(res,"line 63");
