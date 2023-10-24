@@ -10,7 +10,6 @@ app.use(cors());
 app.use(express.json());
 
 const port = process.env.PORT;
-const ip = "172.17.15.248"; // Change this to your desired IP address
 
 
 
@@ -187,6 +186,6 @@ app.get('/sendotp/:empId/:email', (req, res) => {
  
 
 
-app.listen(port, ip, () => {
-  console.log(`Server listening on port http://${ip}:${port}`); 
+app.listen(port,  () => {
+  console.log(`Server listening on port http://localhost:${port}`); 
 }); 
