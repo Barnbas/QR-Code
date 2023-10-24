@@ -131,6 +131,8 @@ app.get('/getcustomerById/:customerId', (req, res) => {
 
  //Complaints
  //Complaints post with sending mails 
+ app.options("/complaints", cors(corsOptions)); // Handle preflight request
+
  app.post("/complaints", cors(corsOptions), (req, res) => {
 
   Server.createComplaint(req,res,()=>
