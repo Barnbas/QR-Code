@@ -2,17 +2,14 @@ const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
-const cors = require("cors");
+const cors = require("cors"); // Import the cors middleware
 const dotenv = require("dotenv").config();
 const Server=require("./mongodb/Server_Logic")
 app.use(bodyParser.json());
 app.use(express.json());
+app.use(cors());
 
-app.use(cors({
-  origin: 'https://frontend-qrcode-i3zx.vercel.app', // Adjust to your frontend's URL
-  methods: 'GET, POST, PUT, DELETE, OPTIONS',
-  allowedHeaders: 'Content-Type, Authorization',
-}));
+
 
 const port = process.env.PORT;
 
@@ -127,7 +124,7 @@ app.get('/getcustomerById/:customerId', (req, res) => {
  app.post('/complaints',(req,res)=>{
   Server.createComplaint(req,res,()=>
   {}); 
-  console.log(res,"line 63");
+  // console.log(res,"line 63");
 })
 //complaints get
 app.get('/getcomplents', (req, res) => {
