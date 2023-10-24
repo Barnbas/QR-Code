@@ -14,6 +14,8 @@ const corsOptions = {
   origin: allowedOrigin,
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
   optionsSuccessStatus: 204,
+  allowedHeaders: ["Content-Type", "Authorization"], // Include any additional headers your application uses
+
 };
 
 app.use(cors(corsOptions));
@@ -129,8 +131,7 @@ app.get('/getcustomerById/:customerId', (req, res) => {
 
  //Complaints
  //Complaints post with sending mails 
- app.post('/complaints',(req,res)=>{
-  res.header("Access-Control-Allow-Origin", allowedOrigin);
+ app.post("/complaints", cors(corsOptions), (req, res) => {
 
   Server.createComplaint(req,res,()=>
   {}); 
