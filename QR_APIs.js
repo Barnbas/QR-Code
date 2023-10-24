@@ -8,15 +8,16 @@ const Server=require("./mongodb/Server_Logic")
 app.use(bodyParser.json());
 app.use(express.json());
 app.use(cors());
-// const allowedOrigin = 'https://frontend-qrcode-i3zx-pfgbvslup-barnbas-projects.vercel.app';
+const allowedOrigin = 'https://frontend-qrcode-i3zx-pfgbvslup-barnbas-projects.vercel.app';
 
-// const corsOptions = {
-//   origin: allowedOrigin,
-//   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-//   optionsSuccessStatus: 204,
-// };
-
-// app.use(cors(corsOptions));
+// Configure CORS options
+const corsOptions = {
+  origin: allowedOrigin,
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  optionsSuccessStatus: 204,
+  allowedHeaders: ["Content-Type", "Authorization"],
+};
+app.use(cors(corsOptions));
 
 
 const port = process.env.PORT;
@@ -200,6 +201,6 @@ app.get('/sendotp/:empId/:email', (req, res) => {
  
 
 
-app.listen(port,  () => {
-  console.log(`Server listening on port http://localhost:${port}`); 
+app.listen(process.env.PORT, () => {
+  console.log(`Server is running on port ${process.env.PORT}`);
 }); 
