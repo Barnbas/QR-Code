@@ -162,11 +162,11 @@ const UserLogin = async (req, res) => {
 
 
 
-let currentAgent = 2000; // Initialize the current agent number
+let currentAgent = 1000; // Initialize the current agent number
 
 const generateAgentId = async () => {
   while (true) {
-    const candidateId = `CM${currentAgent}`;
+    const candidateId = `AG${currentAgent}`;
     // Check if an agent with this ID already exists in the database
     const existingAgent = await Employee.findOne({ empId: candidateId });
 
@@ -216,10 +216,31 @@ const createAgent = async (req, res) => {
   }
 };
 
+let certificateid = 3000; // Initialize the current complaint ID
+
+const generatecertificateid = async () => {
+  while (true) {
+    const candidateId = `CE${certificateid}`;
+    // Check if a complaint with this ID already exists in the database
+    const existingComplaint = await Complaint.findOne({ certificateid: candidateId });
+    
+    if (!existingComplaint) {
+      // If no complaint with this ID exists, return the ID
+      certificateid++;
+      return candidateId;
+    }
+
+    // If the ID already exists, increment complaintdataId and try again
+    complaintdataId++;
+  }
+};
 const createCertificate = async (req, res) => {
+
     try {
+      const certificateid = await generatecertificateid(); // Add "await" here
+
       const certificateData = {
-        certificateId: req.body.certificateId,
+        certificateid,
         name: req.body.name,
         type: req.body.type,
         description: req.body.description,
@@ -416,7 +437,7 @@ const createCertificate = async (req, res) => {
 
 
   // customerInfoController.js
-  let currentOrder = 3000; // Initialize the current order number
+  let currentOrder = 2000; // Initialize the current order number
   const generateOrderedId = async () => {
     while (true) {
       const candidateId = `CU${currentOrder}`;
@@ -711,7 +732,13 @@ const createComplaint = async (req, res) => {
           from: 'barnbastelagareddy123@gmail.com',
           to: customer.email, // Assuming you have an 'email' field in the customer document
           subject: 'Complaint Created',
-          text:'text',
+          text: 'Here is the image you requested:',
+          attachments: [
+            {
+              filename: 'image.png', // You can specify the filename for the attachment
+              path: 'https://www.miraclesoft.com/images/employee-profile-pics/btelagareddy.png', // URL of the image
+            },
+          ],
   //         html: `
   //   <html>
   //     <body style="font-family: Arial, sans-serif; background-color: #f2f2f2; margin: 0; padding: 0;">
