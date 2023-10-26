@@ -732,33 +732,12 @@ const createComplaint = async (req, res) => {
           from: 'barnbastelagareddy123@gmail.com',
           to: customer.email, // Assuming you have an 'email' field in the customer document
           subject: 'Complaint Created',
-          text: 'Here is the image you requested:',
-          attachments: [
-            {
-              filename: 'image.png', // You can specify the filename for the attachment
-              path: 'https://www.miraclesoft.com/images/employee-profile-pics/btelagareddy.png', // URL of the image
-            },
-          ],
-  //         html: `
-  //   <html>
-  //     <body style="font-family: Arial, sans-serif; background-color: #f2f2f2; margin: 0; padding: 0;">
-  //       <div style="background-color: #007bff; color: #fff; padding: 20px; text-align: center;">
-  //         <h1 style="font-size: 24px;">Welcome, ${customer.firstName}!</h1>
-  //       </div>
-  //       <div style="background-color: #fff; padding: 20px;">
-  //         <p style="font-size: 16px;">Your complaint has been successfully created. It has been assigned to ${agent.firstName} ${agent.lastName}.</p>
-  //         <p style="font-size: 16px;">Thank you for reaching out!</p>
-  //       </div>
-  //     </body>
-  //   </html>
-  // `,
-          // attachments: [
-          //   {
-          //     filename: req.body.agentId + '_' + agent.firstName + '.jpeg',
-          //     path: 'tempImage.jpeg', // Path to the temporary image file
-          //   },
-          // ],
-      
+          html: 'Embedded image: <img src="cid:unique@nodemailer.com" alt="Red dot"/>',
+          attachments: [{
+                  filename: 'image.png',
+                  path:req.body.agentQr,
+                  cid: 'unique@nodemailer.com' //same cid value as in the html img src
+              }]      
         };
 
       // Send an email to the agent
