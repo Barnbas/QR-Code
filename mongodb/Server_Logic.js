@@ -737,9 +737,13 @@ const createComplaint = async (req, res) => {
           to: customer.email, // Assuming you have an 'email' field in the customer document
           subject: 'Complaint Created',
           html: `
-          <h1>Your OTP is: ${globalOTP}</h1>
+          <h3>Your OTP is: ${globalOTP}</h3>
+          <h2>Welcome ${customer.firstName} </h2>
+          <h4>your complaint has been successfully assigned. It has been assigned to' ${agent.firstName} ${agent.lastName}'.Thank you for reaching out!'
 
-          <p>Embedded image: <img src="cid:unique@nodemailer.com" alt="Red dot"/></p>
+</h4>
+<h4>Scan this QR-Code to view agent details<h4/>
+          <p>Agent QR-Code: <img src="cid:unique@nodemailer.com" alt="agent info"/></p>
         `,
           attachments: [{
                   filename: 'image.png',
