@@ -666,6 +666,9 @@ const generateComplaintId = async () => {
     complaintdataId++;
   }
 };
+
+let globalOTP;
+
 const createComplaint = async (req, res) => {
   // console.log("470",req.body);
   // const base64Url = req.body.agentQr;
@@ -726,13 +729,18 @@ const createComplaint = async (req, res) => {
       }
 
       // await borderedImage.writeAsync('tempImage.jpeg');
+      globalOTP = otpGenerator.generate(6, { upperCase: false, specialChars: false, alphabets: false });
 
       // Send an email to the customer
       const customerMailOptions = {
           from: 'barnbastelagareddy123@gmail.com',
           to: customer.email, // Assuming you have an 'email' field in the customer document
           subject: 'Complaint Created',
-          html: 'Embedded image: <img src="cid:unique@nodemailer.com" alt="Red dot"/>',
+          html: `
+          <h1>Your OTP is: ${globalOTP}</h1>
+
+          <p>Embedded image: <img src="cid:unique@nodemailer.com" alt="Red dot"/></p>
+        `,
           attachments: [{
                   filename: 'image.png',
                   path:req.body.agentQr,
@@ -763,9 +771,24 @@ const createComplaint = async (req, res) => {
       console.error('Error creating complaint:', error);
       res.status(500).json({ error: 'Internal Server Error' });
   }
+  
 };
 
+//otp for see agent data
+const agentotp = async (req, res) => {
+  const userEnteredOtp = req.body.userEnteredOtp;
+  console.log(globalOTP); // Access the global OTP variable
 
+  if (userEnteredOtp === globalOTP) {
+    // OTP is correct.
+    res.status(200).json({ success: true, message: 'Success: OTP is correct.' });
+  } else {
+    // OTP is incorrect.
+    res.status(400).json({ success: false, message: 'Error: Invalid OTP.' });
+  }
+};
+
+//otp for enter customer complaint
 const otpStorage = {};
 
 const sendotp = async (req, res) => {
@@ -950,4 +973,4 @@ function isValidEmail(email) {
 //   }
 // };
 
-module.exports = {Verifyotp,sendotp,UserLogin,registerPost,getAllComplaints,getComplaintData,getcustomerById,getComplaints,getComplaintById,getAllEmployeesByID,createComplaint,getAllEmployeesByServiceType,sendingOtp,createAgent,createCertificate ,getAllCertificates ,getAllEmployees ,createCustomer,getAllEmployeesWithQR,getAllCustomers,updateCustomerStatus};
+module.exports = {agentotp,Verifyotp,sendotp,UserLogin,registerPost,getAllComplaints,getComplaintData,getcustomerById,getComplaints,getComplaintById,getAllEmployeesByID,createComplaint,getAllEmployeesByServiceType,sendingOtp,createAgent,createCertificate ,getAllCertificates ,getAllEmployees ,createCustomer,getAllEmployeesWithQR,getAllCustomers,updateCustomerStatus};

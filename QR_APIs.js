@@ -19,7 +19,7 @@ app.use(cors());
 // };
 // app.use(cors(corsOptions));
 
-
+const ip='172.17.15.248';
 const port = process.env.PORT;
 
 
@@ -172,7 +172,11 @@ app.post('/Verifyotp',(req,res)=>{
 }) 
 
 
-
+//agentotp
+app.post('/enterotp',(req,res)=>{
+  Server.agentotp(req,res,()=>
+  {}); 
+}) 
 
 //QRcode generating
 //generating QR with id
@@ -204,3 +208,6 @@ app.get('/sendotp/:empId/:email', (req, res) => {
 app.listen(process.env.PORT, () => {
   console.log(`Server is running on port ${process.env.PORT}`);
 }); 
+// app.listen(port, ip, () => {
+//   console.log(`Server listening on port http://${ip}:${port}`);
+// });
