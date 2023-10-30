@@ -118,9 +118,9 @@ const registerPost = async (req, res) => {
 
 //Login
 const UserLogin = async (req, res) => {
-  const { password, empId } = req.body;
+  const { Password, empId } = req.body;
 
-  if (!password || !empId) {
+  if (!Password || !empId) {
       return res.status(400).json({ error: 'Password and empId are required.' });
   }
 
@@ -131,7 +131,7 @@ const UserLogin = async (req, res) => {
           return res.status(401).json({ error: 'Invalid credentials.' });
       }
 
-      if (user.password !== password) {
+      if (user.password !== Password) {
           return res.status(401).json({ error: 'Invalid credentials.' });
       }
 
@@ -893,22 +893,34 @@ const agentotp = async (req, res) => {
 const otpStorage = {};
 
 const sendotp = async (req, res) => {
-  const { email } = req.body;
+  const { Email } = req.body;
 
   // Ensure that the email is valid before proceeding
-  if (!isValidEmail(email)) {
+  if (!isValidEmail(Email)) {
     return res.status(400).json({ error: 'Invalid email address' });
   }
 
   // Generate a random 6-digit OTP
-  const otp = otpGenerator.generate(6, { upperCase: false, specialChars: false });
-
+  // const otp = otpGenerator.generate(6, { upperCase: false, specialChars: false });
+  function generateNumericOtp(length) {
+    const digits = '0123456789';
+    let otp = '';
+    for (let i = 0; i < length; i++) {
+      const randomIndex = Math.floor(Math.random() * digits.length);
+      otp += digits[randomIndex];
+    }
+    return otp;
+  }
+  
+  // Generate a 6-digit numeric OTP
+  const otp = generateNumericOtp(6);
+  
   // Store the OTP associated with the email for later verification
-  otpStorage[email] = otp;
+  otpStorage[Email] = otp;
 
   const mailOptions = {
     from: 'barnbastelagareddy123@gmail.com',
-    to: email,
+    to: Email,
     subject: 'OTP for Verification',
     text: `Your OTP is: ${otp}`,
   };
