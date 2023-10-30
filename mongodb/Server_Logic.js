@@ -239,11 +239,11 @@ let certificateid = 3000; // Initialize the current complaint ID
 const generatecertificateid = async () => {
   try {
     // Find the highest existing agent ID in the database
-    const highestAgent = await Certificate.findOne({}, { empId: 1 }).sort({ empId: -1 });
+    const highestAgent = await Certificate.findOne({}, { certificateId: 1 }).sort({ certificateId: -1 });
 
     // Initialize the currentAgent number based on the highest existing agent ID
     if (highestAgent) {
-      const lastAgentId = highestAgent.empId;
+      const lastAgentId = highestAgent.certificateId;
       const lastNumber = parseInt(lastAgentId.slice(2)); // Extract the number part
       certificateid = lastNumber + 1;
     }
@@ -252,7 +252,7 @@ const generatecertificateid = async () => {
     const candidateId = `CE${certificateid}`;
 
     // Ensure the candidate ID doesn't already exist in the database
-    const existingAgent = await Certificate.findOne({ empId: candidateId });
+    const existingAgent = await Certificate.findOne({ certificateId: candidateId });
 
     if (!existingAgent) {
       // If no agent with this ID exists, return the ID
@@ -261,7 +261,7 @@ const generatecertificateid = async () => {
     }
 
     // If the ID already exists, increment currentAgent and try again
-    currentAgent++;
+    certificateid++;
     return generatecertificateid(); // Recursively call the function to find the next available ID
   } catch (error) {
     logger.error('Error generating agent ID:', error);
@@ -476,11 +476,11 @@ const createCertificate = async (req, res) => {
   const generateOrderedId = async () => {
     try {
       // Find the highest existing agent ID in the database
-      const highestAgent = await CustomerInfo.findOne({}, { empId: 1 }).sort({ empId: -1 });
+      const highestAgent = await CustomerInfo.findOne({}, { customerId: 1 }).sort({ customerId: -1 });
   
       // Initialize the currentAgent number based on the highest existing agent ID
       if (highestAgent) {
-        const lastAgentId = highestAgent.empId;
+        const lastAgentId = highestAgent.customerId;
         const lastNumber = parseInt(lastAgentId.slice(2)); // Extract the number part
         currentOrder = lastNumber + 1;
       }
@@ -489,7 +489,7 @@ const createCertificate = async (req, res) => {
       const candidateId = `CU${currentOrder}`;
   
       // Ensure the candidate ID doesn't already exist in the database
-      const existingAgent = await CustomerInfo.findOne({ empId: candidateId });
+      const existingAgent = await CustomerInfo.findOne({ customerId: candidateId });
   
       if (!existingAgent) {
         // If no agent with this ID exists, return the ID
@@ -498,7 +498,7 @@ const createCertificate = async (req, res) => {
       }
   
       // If the ID already exists, increment currentOrder and try again
-      currentAgent++;
+      currentOrder++;
       return generateOrderedId(); // Recursively call the function to find the next available ID
     } catch (error) {
       logger.error('Error generating customer ID:', error);
@@ -735,10 +735,10 @@ let complaintdataId = 4000;
 const generateComplaintId = async () => {
   try {
     // Find the highest existing agent ID in the database
-    const highestAgent = await Complaint.findOne({}, { empId: 1 }).sort({ empId: -1 });
+    const highestAgent = await Complaint.findOne({}, { complaintId: 1 }).sort({ complaintId: -1 });
 
     if (highestAgent) {
-      const lastAgentId = highestAgent.empId;
+      const lastAgentId = highestAgent.complaintId;
       const lastNumber = parseInt(lastAgentId.slice(2)); 
       complaintdataId = lastNumber + 1;
     }
@@ -747,7 +747,7 @@ const generateComplaintId = async () => {
     const candidateId = `CM${complaintdataId}`;
 
     // Ensure the candidate ID doesn't already exist in the database
-    const existingAgent = await Complaint.findOne({ empId: candidateId });
+    const existingAgent = await Complaint.findOne({ complaintId: candidateId });
 
     if (!existingAgent) {
       // If no agent with this ID exists, return the ID
@@ -756,7 +756,7 @@ const generateComplaintId = async () => {
     }
 
     // If the ID already exists, increment currentAgent and try again
-    currentAgent++;
+    complaintdataId++;
     return generatecertificateid(); // Recursively call the function to find the next available ID
   } catch (error) {
     logger.error('Error generating complaintdataId :', error);
