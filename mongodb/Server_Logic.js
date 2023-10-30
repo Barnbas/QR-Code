@@ -5,6 +5,7 @@ const Registration = require('./models/Registraction');
 const jwt = require("jsonwebtoken");
 const jwtSecret = 'babi ';
 const otpGenerator = require('otp-generator'); // You may need to install this package
+const logger = require('../logger/logger'); // Import the logger module
 
 const base64Img = require('base64-img');
 // Import the Complaint model
@@ -106,7 +107,7 @@ const registerPost = async (req, res) => {
             message: "User Successfully Registered...! Now You Can Login",
         });
     } catch (error) {
-        console.error(error);
+        logger.error(error);
         res.status(500).json({
             message: "Error occurred while registering user",
             error: error.message,
@@ -151,7 +152,7 @@ const UserLogin = async (req, res) => {
 
       res.status(200).json({ message: 'Authentication successful.', token });
   } catch (error) {
-      console.error('Error checking user:', error);
+    logger.error('Error checking user:', error);
       res.status(500).json({ error: 'An error occurred while checking user.' });
   }
 }
@@ -192,7 +193,7 @@ const generateAgentId = async () => {
     currentAgent++;
     return generateAgentId(); // Recursively call the function to find the next available ID
   } catch (error) {
-    console.error('Error generating agent ID:', error);
+    logger.error('Error generating agent ID:', error);
     throw new Error('Failed to generate agent ID');
   }
 };
@@ -228,7 +229,7 @@ const createAgent = async (req, res) => {
     await newEmployee.save(); // Save the new employee document to the database
     res.status(201).json(newEmployee);
   } catch (error) {
-    console.error('Error creating agent:', error);
+    logger.error('Error creating agent:', error);
     res.status(500).json({ error: 'Internal Server Error' });
   }
 };
@@ -263,7 +264,7 @@ const generatecertificateid = async () => {
     currentAgent++;
     return generatecertificateid(); // Recursively call the function to find the next available ID
   } catch (error) {
-    console.error('Error generating agent ID:', error);
+    logger.error('Error generating agent ID:', error);
     throw new Error('Failed to generate agent ID');
   }
 };
@@ -285,7 +286,7 @@ const createCertificate = async (req, res) => {
       await newCertificate.save(); // Save the new certificate document to the database
       res.status(201).json(newCertificate);
     } catch (error) {
-      console.error('Error creating certificate:', error);
+      logger.error('Error creating certificate:', error);
       res.status(500).json({ error: 'Internal Server Error' });
     }
   };
@@ -296,7 +297,7 @@ const createCertificate = async (req, res) => {
       const certificates = await Certificate.find(); // Retrieve all certificates from the database
       res.status(200).json(certificates);
     } catch (error) {
-      console.error('Error retrieving certificates:', error);
+      logger.error('Error retrieving certificates:', error);
       res.status(500).json({ error: 'Internal Server Error' });
     }
   };
@@ -306,7 +307,7 @@ const createCertificate = async (req, res) => {
       const employees = await Employee.find(); // Retrieve all certificates from the database
       res.status(200).json(employees);
     } catch (error) {
-      console.error('Error retrieving certificates:', error);
+      logger.error('Error retrieving certificates:', error);
       res.status(500).json({ error: 'Internal Server Error' });
     }
   };
@@ -323,7 +324,7 @@ const createCertificate = async (req, res) => {
   
       res.status(200).json(employees);
     } catch (error) {
-      console.error('Error retrieving employees by serviceType:', error);
+      logger.error('Error retrieving employees by serviceType:', error);
       res.status(500).json({ error: 'Internal Server Error' });
     }
   };
@@ -340,7 +341,7 @@ const createCertificate = async (req, res) => {
   
       res.status(200).json(employees);
     } catch (error) {
-      console.error('Error retrieving employees by serviceType:', error);
+      logger.error('Error retrieving employees by serviceType:', error);
       res.status(500).json({ error: 'Internal Server Error' });
     }
   };
@@ -377,9 +378,9 @@ const createCertificate = async (req, res) => {
   
     transporter.sendMail(mailOptions, (error, info) => {
       if (error) {
-        console.error('Error sending OTP:', error);
+        logger.error('Error sending OTP:', error);
       } else {
-        console.log('OTP sent:', info.response);
+        logger.info('OTP sent:', info.response);
       }
     });
   }
@@ -400,7 +401,7 @@ const createCertificate = async (req, res) => {
   
       res.status(200).json({ message: 'OTP sent via email' });
     } catch (error) {
-      console.error('Error generating OTP:', error);
+      logger.error('Error generating OTP:', error);
       res.status(500).json({ error: 'Internal Server Error' });
     }
   };
@@ -447,7 +448,7 @@ const createCertificate = async (req, res) => {
         res.status(401).json({ error: 'Invalid OTP' });
       }
     } catch (error) {
-      console.error('Error generating QR code:', error);
+      logger.error('Error generating QR code:', error);
       res.status(500).json({ error: 'Internal Server Error' });
     }
   };
@@ -500,7 +501,7 @@ const createCertificate = async (req, res) => {
       currentAgent++;
       return generateOrderedId(); // Recursively call the function to find the next available ID
     } catch (error) {
-      console.error('Error generating customer ID:', error);
+      logger.error('Error generating customer ID:', error);
       throw new Error('Failed to generate customer ID');
     }
   };
@@ -531,7 +532,7 @@ const createCertificate = async (req, res) => {
       await newCustomer.save(); // Save the new customer document to the database
       res.status(201).json(newCustomer);
     } catch (error) {
-      console.error('Error creating customer:', error);
+      logger.error('Error creating customer:', error);
       res.status(500).json({ error: 'Internal Server Error' });
     }
   };
@@ -542,7 +543,7 @@ const createCertificate = async (req, res) => {
       const customers = await CustomerInfo.find(); // Retrieve all customers from the database
       res.status(200).json(customers);
     } catch (error) {
-      console.error('Error retrieving customers:', error);
+      logger.error('Error retrieving customers:', error);
       res.status(500).json({ error: 'Internal Server Error' });
     }
   };
@@ -556,7 +557,7 @@ const createCertificate = async (req, res) => {
       );
       return updatedCustomer;
     } catch (error) {
-      console.error('Error updating customer status:', error);
+      logger.error('Error updating customer status:', error);
       throw new Error('Internal Server Error');
     }
   };
@@ -578,7 +579,7 @@ const getcustomerById = async (req, res) => {
 
     res.status(200).json(complaint);
   } catch (error) {
-    console.error('Error retrieving complaint by ID:', error);
+    logger.error('Error retrieving complaint by ID:', error);
     res.status(500).json({ error: 'Internal Server Error' });
   }
 };
@@ -587,7 +588,7 @@ const getComplaints = async (req, res) => {
     const complaints = await Complaint.find(); // Retrieve all Complaints from the database
     res.status(200).json(complaints);
   } catch (error) {
-    console.error('Error retrieving complaints:', error);
+    logger.error('Error retrieving complaints:', error);
     res.status(500).json({ error: 'Internal Server Error' });
   }
 };
@@ -604,7 +605,7 @@ const getComplaintById = async (req, res) => {
 
     res.status(200).json(complaint);
   } catch (error) {
-    console.error('Error retrieving complaint by ID:', error);
+    logger.error('Error retrieving complaint by ID:', error);
     res.status(500).json({ error: 'Internal Server Error' });
   }
 };
@@ -629,7 +630,6 @@ const getComplaintDataforagent = async (req, res) => {
         customerInfo.push(customer);
       }
     }
-
     if (customerInfo.length === 0) {
       return res.status(404).json({ error: 'No customer information found for the specified agent' });
     }
@@ -637,7 +637,7 @@ const getComplaintDataforagent = async (req, res) => {
     // Return an array of customer information
     res.status(200).json(customerInfo);
   } catch (error) {
-    console.error('Error fetching customer information by agentId:', error);
+    logger.error('Error fetching customer information by agentId:', error);
     res.status(500).json({ error: 'Internal Server Error' });
   }
 };
@@ -678,7 +678,7 @@ const getComplaintData = async (req, res) => {
 
       res.status(200).json(response);
   } catch (error) {
-      console.error('Error fetching complaint data:', error);
+    logger.error('Error fetching complaint data:', error);
       res.status(500).json({ error: 'Internal Server Error' });
   }
 };
@@ -714,7 +714,7 @@ const getAllComplaints = async (req, res) => {
 
     res.status(200).json(data);
   } catch (error) {
-    console.error('Error fetching data:', error);
+    logger.error('Error fetching data:', error);
     res.status(500).json({ error: 'Internal Server Error' });
   }
 };
@@ -759,14 +759,13 @@ const generateComplaintId = async () => {
     currentAgent++;
     return generatecertificateid(); // Recursively call the function to find the next available ID
   } catch (error) {
-    console.error('Error generating complaintdataId :', error);
+    logger.error('Error generating complaintdataId :', error);
     throw new Error('Failed to generate complaintdataId ');
   }
 };
 let globalOTP;
 
 const createComplaint = async (req, res) => {
-  // console.log("470",req.body);
   // const base64Url = req.body.agentQr;
   const base64Data = req.body.agentQr;
   const borderWidth = 5; // Desired border size in pixels
@@ -795,7 +794,7 @@ const createComplaint = async (req, res) => {
     // Paste the original image onto the bordered image
     borderedImage.composite(image, xOffset, yOffset);
   } catch (error) {
-    console.error('Error processing image:', error);
+    logger.error('Error processing image:', error);
     return res.status(500).json({ error: 'Internal Server Error' });
   }
   try {
@@ -859,17 +858,17 @@ const createComplaint = async (req, res) => {
 
       transporter.sendMail(customerMailOptions, (customerError) => {
           if (customerError) {
-              console.error('Error sending email to customer:', customerError);
+            logger.error('Error sending email to customer:', customerError);
           }
           transporter.sendMail(agentMailOptions, (agentError) => {
               if (agentError) {
-                  console.error('Error sending email to agent:', agentError);
+                logger.error('Error sending email to agent:', agentError);
               }
               res.status(201).json({ complaint: newComplaint, customer, agent });
           });
       });
   } catch (error) {
-      console.error('Error creating complaint:', error);
+    logger.error('Error creating complaint:', error);
       res.status(500).json({ error: 'Internal Server Error' });
   }
   
@@ -878,7 +877,6 @@ const createComplaint = async (req, res) => {
 //otp for see agent data
 const agentotp = async (req, res) => {
   const userEnteredOtp = req.body.userEnteredOtp;
-  console.log(globalOTP); // Access the global OTP variable
 
   if (userEnteredOtp === globalOTP) {
     // OTP is correct.
@@ -893,10 +891,10 @@ const agentotp = async (req, res) => {
 const otpStorage = {};
 
 const sendotp = async (req, res) => {
-  const { Email } = req.body;
+  const { email } = req.body;
 
   // Ensure that the email is valid before proceeding
-  if (!isValidEmail(Email)) {
+  if (!isValidEmail(email)) {
     return res.status(400).json({ error: 'Invalid email address' });
   }
 
@@ -916,21 +914,21 @@ const sendotp = async (req, res) => {
   const otp = generateNumericOtp(6);
   
   // Store the OTP associated with the email for later verification
-  otpStorage[Email] = otp;
+  otpStorage[email] = otp;
 
   const mailOptions = {
     from: 'barnbastelagareddy123@gmail.com',
-    to: Email,
+    to: email,
     subject: 'OTP for Verification',
     text: `Your OTP is: ${otp}`,
   };
 
   transporter.sendMail(mailOptions, (error) => {
     if (error) {
-      console.error('Error sending OTP:', error);
+      logger.error('Error sending OTP:', error);
       res.status(500).json({ error: 'Failed to send OTP' });
     } else {
-      console.log('OTP sent successfully');
+      logger.info('OTP sent successfully');
       res.status(200).json({ message: 'OTP sent successfully' });
     }
   });

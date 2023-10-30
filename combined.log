@@ -1,0 +1,52 @@
+info: Server is running on port 2600
+info: Server is running on port 2600
+info: Server is running on port 2600
+info: Server is running on port 2600
+info: Server is running on port 2600
+info: Server is running on port 2600
+info: QR_Code_Employee MongoDB Connected
+info: Server is running on port 2600
+info: Server is running on port 2600
+info: QR_Code_Employee MongoDB Connected
+info: Server is running on port 2600
+info: QR_Code_Employee MongoDB Connected
+info: Server is running on port 2600
+info: QR_Code_Employee MongoDB Connected
+info: Server is running on port 2600
+info: QR_Code_Employee MongoDB Connected
+info: Server is running on port 2600
+info: QR_Code_Employee MongoDB Connected
+info: Server is running on port 2600
+info: QR_Code_Employee MongoDB Connected
+info: Server is running on port 2600
+info: QR_Code_Employee MongoDB Connected
+info: Server is running on port 2600
+info: QR_Code_Employee MongoDB Connected
+info: Server is running on port 2600
+info: QR_Code_Employee MongoDB Connected
+info: Server is running on port 2600
+info: Server is running on port 2600
+info: Server is running on port 2600
+info: Server is running on port 2600
+info: QR_Code_Employee MongoDB Connected
+info: Server is running on port 2600
+info: QR_Code_Employee MongoDB Connected
+info: QR_Code_Employee MongoDB Connected
+error: Error generating customer ID: Cannot read properties of undefined (reading 'slice') {"stack":"TypeError: Cannot read properties of undefined (reading 'slice')\n    at generateOrderedId (D:\\QR_Backend\\QR-Code\\mongodb\\Server_Logic.js:484:49)\n    at processTicksAndRejections (node:internal/process/task_queues:96:5)\n    at async Object.createCustomer (D:\\QR_Backend\\QR-Code\\mongodb\\Server_Logic.js:512:26)"}
+error: Error creating customer: Failed to generate customer ID {"stack":"Error: Failed to generate customer ID\n    at generateOrderedId (D:\\QR_Backend\\QR-Code\\mongodb\\Server_Logic.js:505:13)\n    at processTicksAndRejections (node:internal/process/task_queues:96:5)\n    at async Object.createCustomer (D:\\QR_Backend\\QR-Code\\mongodb\\Server_Logic.js:512:26)"}
+info: QR_Code_Employee MongoDB Connected
+error: Error generating customer ID: Cannot read properties of undefined (reading 'slice') {"stack":"TypeError: Cannot read properties of undefined (reading 'slice')\n    at generateOrderedId (D:\\QR_Backend\\QR-Code\\mongodb\\Server_Logic.js:484:49)\n    at processTicksAndRejections (node:internal/process/task_queues:96:5)\n    at async Object.createCustomer (D:\\QR_Backend\\QR-Code\\mongodb\\Server_Logic.js:512:26)"}
+error: Error creating customer: Failed to generate customer ID {"stack":"Error: Failed to generate customer ID\n    at generateOrderedId (D:\\QR_Backend\\QR-Code\\mongodb\\Server_Logic.js:505:13)\n    at processTicksAndRejections (node:internal/process/task_queues:96:5)\n    at async Object.createCustomer (D:\\QR_Backend\\QR-Code\\mongodb\\Server_Logic.js:512:26)"}
+info: QR_Code_Employee MongoDB Connected
+info: Server is running on port 2600
+info: QR_Code_Employee MongoDB Connected
+info: Server is running on port 2600
+info: QR_Code_Employee MongoDB Connected
+info: Server is running on port 2600
+info: QR_Code_Employee MongoDB Connected
+info: Server is running on port 2600
+info: Server is running on port 2600
+info: QR_Code_Employee MongoDB Connected
+info: Server is running on port 2600
+info: Server is running on port 2600
+info: QR_Code_Employee MongoDB Connected

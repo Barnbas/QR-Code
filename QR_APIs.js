@@ -8,6 +8,9 @@ const Server=require("./mongodb/Server_Logic")
 app.use(bodyParser.json());
 app.use(express.json());
 app.use(cors());
+
+const logger = require('./logger/logger'); // Import the logger module
+
 // const allowedOrigin = 'https://frontend-qrcode-i3zx-pfgbvslup-barnbas-projects.vercel.app';
 
 // // Configure CORS options
@@ -31,10 +34,10 @@ mongoose
     useUnifiedTopology: true,
   })
   .then(() => {
-    console.log("QR_Code_Employee MongoDB Connected");
+    logger.info("QR_Code_Employee MongoDB Connected");
   })
   .catch((error) => {
-    console.log(error);
+    logger.error(error);
   });
 
 //Reg
@@ -208,7 +211,7 @@ app.get('/sendotp/:empId/:email', (req, res) => {
 
 
 app.listen(process.env.PORT, () => {
-  console.log(`Server is running on port ${process.env.PORT}`);
+  logger.info(`Server is running on port ${process.env.PORT}`);
 }); 
 // app.listen(port, ip, () => {
 //   console.log(`Server listening on port http://${ip}:${port}`);
