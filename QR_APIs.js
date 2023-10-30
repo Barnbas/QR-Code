@@ -207,9 +207,9 @@ app.get('/sendotp/:empId/:email', (req, res) => {
  
 
 
-// app.listen(process.env.PORT, () => {
-//   console.log(`Server is running on port ${process.env.PORT}`);
-// }); 
-app.listen(port, ip, () => {
-  console.log(`Server listening on port http://${ip}:${port}`);
-});
+app.listen(process.env.PORT, () => {
+  console.log(`Server is running on port ${process.env.PORT}`);
+}); 
+// app.listen(port, ip, () => {
+//   console.log(`Server listening on port http://${ip}:${port}`);
+// });
