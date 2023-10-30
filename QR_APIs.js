@@ -65,7 +65,6 @@ app.post('/login', (req, res) => {
 app.get('/getAgents/:empId', (req, res) => {
   
   Server.getAllEmployeesByID(req, res, () => {});
-  console.log(res,"line 63");
 });
 
 //get agent by servicetype
@@ -133,7 +132,6 @@ app.get('/getcustomerById/:customerId', (req, res) => {
  app.post('/complaints',(req,res)=>{
   Server.createComplaint(req,res,()=>
   {}); 
-  // console.log(res,"line 63");
 })
 //complaints get
 app.get('/getcomplents', (req, res) => {
@@ -158,6 +156,10 @@ app.get('/getAllComplaints', (req, res) => {
   Server.getAllComplaints(req, res, () => {});
 });
 
+//getcustomerdata based on agentid
+app.get('/getcustomerinfo/:agentId', (req, res) => {
+  Server.getComplaintDataforagent(req, res, () => {});
+});
 
 //Otp
 app.post('/sendotp',(req,res)=>{
@@ -205,9 +207,9 @@ app.get('/sendotp/:empId/:email', (req, res) => {
  
 
 
-app.listen(process.env.PORT, () => {
-  console.log(`Server is running on port ${process.env.PORT}`);
-}); 
-// app.listen(port, ip, () => {
-//   console.log(`Server listening on port http://${ip}:${port}`);
-// });
+// app.listen(process.env.PORT, () => {
+//   console.log(`Server is running on port ${process.env.PORT}`);
+// }); 
+app.listen(port, ip, () => {
+  console.log(`Server listening on port http://${ip}:${port}`);
+});

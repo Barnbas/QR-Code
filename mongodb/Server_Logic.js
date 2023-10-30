@@ -165,9 +165,21 @@ const UserLogin = async (req, res) => {
 let currentAgent = 1000; // Initialize the current agent number
 
 const generateAgentId = async () => {
-  while (true) {
+  try {
+    // Find the highest existing agent ID in the database
+    const highestAgent = await Employee.findOne({}, { empId: 1 }).sort({ empId: -1 });
+
+    // Initialize the currentAgent number based on the highest existing agent ID
+    if (highestAgent) {
+      const lastAgentId = highestAgent.empId;
+      const lastNumber = parseInt(lastAgentId.slice(2)); // Extract the number part
+      currentAgent = lastNumber + 1;
+    }
+
+    // Generate the candidate ID
     const candidateId = `AG${currentAgent}`;
-    // Check if an agent with this ID already exists in the database
+
+    // Ensure the candidate ID doesn't already exist in the database
     const existingAgent = await Employee.findOne({ empId: candidateId });
 
     if (!existingAgent) {
@@ -178,8 +190,13 @@ const generateAgentId = async () => {
 
     // If the ID already exists, increment currentAgent and try again
     currentAgent++;
+    return generateAgentId(); // Recursively call the function to find the next available ID
+  } catch (error) {
+    console.error('Error generating agent ID:', error);
+    throw new Error('Failed to generate agent ID');
   }
 };
+
 
 const createAgent = async (req, res) => {
   try {
@@ -219,21 +236,38 @@ const createAgent = async (req, res) => {
 let certificateid = 3000; // Initialize the current complaint ID
 
 const generatecertificateid = async () => {
-  while (true) {
+  try {
+    // Find the highest existing agent ID in the database
+    const highestAgent = await Certificate.findOne({}, { empId: 1 }).sort({ empId: -1 });
+
+    // Initialize the currentAgent number based on the highest existing agent ID
+    if (highestAgent) {
+      const lastAgentId = highestAgent.empId;
+      const lastNumber = parseInt(lastAgentId.slice(2)); // Extract the number part
+      certificateid = lastNumber + 1;
+    }
+
+    // Generate the candidate ID
     const candidateId = `CE${certificateid}`;
-    // Check if a complaint with this ID already exists in the database
-    const existingComplaint = await Complaint.findOne({ certificateid: candidateId });
-    
-    if (!existingComplaint) {
-      // If no complaint with this ID exists, return the ID
+
+    // Ensure the candidate ID doesn't already exist in the database
+    const existingAgent = await Certificate.findOne({ empId: candidateId });
+
+    if (!existingAgent) {
+      // If no agent with this ID exists, return the ID
       certificateid++;
       return candidateId;
     }
 
-    // If the ID already exists, increment complaintdataId and try again
-    complaintdataId++;
+    // If the ID already exists, increment currentAgent and try again
+    currentAgent++;
+    return generatecertificateid(); // Recursively call the function to find the next available ID
+  } catch (error) {
+    console.error('Error generating agent ID:', error);
+    throw new Error('Failed to generate agent ID');
   }
 };
+
 const createCertificate = async (req, res) => {
 
     try {
@@ -439,19 +473,35 @@ const createCertificate = async (req, res) => {
   // customerInfoController.js
   let currentOrder = 2000; // Initialize the current order number
   const generateOrderedId = async () => {
-    while (true) {
+    try {
+      // Find the highest existing agent ID in the database
+      const highestAgent = await CustomerInfo.findOne({}, { empId: 1 }).sort({ empId: -1 });
+  
+      // Initialize the currentAgent number based on the highest existing agent ID
+      if (highestAgent) {
+        const lastAgentId = highestAgent.empId;
+        const lastNumber = parseInt(lastAgentId.slice(2)); // Extract the number part
+        currentOrder = lastNumber + 1;
+      }
+  
+      // Generate the candidate ID
       const candidateId = `CU${currentOrder}`;
-      // Check if a customer with this ID already exists in the database
-      const existingCustomer = await CustomerInfo.findOne({ customerId: candidateId });
-      
-      if (!existingCustomer) {
-        // If no customer with this ID exists, return the ID
+  
+      // Ensure the candidate ID doesn't already exist in the database
+      const existingAgent = await CustomerInfo.findOne({ empId: candidateId });
+  
+      if (!existingAgent) {
+        // If no agent with this ID exists, return the ID
         currentOrder++;
         return candidateId;
       }
   
       // If the ID already exists, increment currentOrder and try again
-      currentOrder++;
+      currentAgent++;
+      return generateOrderedId(); // Recursively call the function to find the next available ID
+    } catch (error) {
+      console.error('Error generating customer ID:', error);
+      throw new Error('Failed to generate customer ID');
     }
   };
   
@@ -559,6 +609,39 @@ const getComplaintById = async (req, res) => {
   }
 };
 
+const getComplaintDataforagent = async (req, res) => {
+  try {
+    const agentId = req.params.agentId; // Assuming agentId is in the URL parameters
+
+    // Find all complaint documents with the specified agentId
+    const complaints = await Complaint.find({ agentId });
+
+    if (complaints.length === 0) {
+      return res.status(404).json({ error: 'No complaints found for the specified agent' });
+    }
+
+    // Fetch customer information for each complaint
+    const customerInfo = [];
+
+    for (const complaint of complaints) {
+      const customer = await CustomerInfo.findOne({ customerId: complaint.customerId });
+      if (customer) {
+        customerInfo.push(customer);
+      }
+    }
+
+    if (customerInfo.length === 0) {
+      return res.status(404).json({ error: 'No customer information found for the specified agent' });
+    }
+
+    // Return an array of customer information
+    res.status(200).json(customerInfo);
+  } catch (error) {
+    console.error('Error fetching customer information by agentId:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+};
+
 
 
 const getComplaintData = async (req, res) => {
@@ -648,25 +731,38 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-let complaintdataId = 4000; // Initialize the current complaint ID
-
+let complaintdataId = 4000; 
 const generateComplaintId = async () => {
-  while (true) {
+  try {
+    // Find the highest existing agent ID in the database
+    const highestAgent = await Complaint.findOne({}, { empId: 1 }).sort({ empId: -1 });
+
+    if (highestAgent) {
+      const lastAgentId = highestAgent.empId;
+      const lastNumber = parseInt(lastAgentId.slice(2)); 
+      complaintdataId = lastNumber + 1;
+    }
+
+    // Generate the candidate ID
     const candidateId = `CM${complaintdataId}`;
-    // Check if a complaint with this ID already exists in the database
-    const existingComplaint = await Complaint.findOne({ complaintId: candidateId });
-    
-    if (!existingComplaint) {
-      // If no complaint with this ID exists, return the ID
+
+    // Ensure the candidate ID doesn't already exist in the database
+    const existingAgent = await Complaint.findOne({ empId: candidateId });
+
+    if (!existingAgent) {
+      // If no agent with this ID exists, return the ID
       complaintdataId++;
       return candidateId;
     }
 
-    // If the ID already exists, increment complaintdataId and try again
-    complaintdataId++;
+    // If the ID already exists, increment currentAgent and try again
+    currentAgent++;
+    return generatecertificateid(); // Recursively call the function to find the next available ID
+  } catch (error) {
+    console.error('Error generating complaintdataId :', error);
+    throw new Error('Failed to generate complaintdataId ');
   }
 };
-
 let globalOTP;
 
 const createComplaint = async (req, res) => {
@@ -977,4 +1073,4 @@ function isValidEmail(email) {
 //   }
 // };
 
-module.exports = {agentotp,Verifyotp,sendotp,UserLogin,registerPost,getAllComplaints,getComplaintData,getcustomerById,getComplaints,getComplaintById,getAllEmployeesByID,createComplaint,getAllEmployeesByServiceType,sendingOtp,createAgent,createCertificate ,getAllCertificates ,getAllEmployees ,createCustomer,getAllEmployeesWithQR,getAllCustomers,updateCustomerStatus};
+module.exports = {getComplaintDataforagent,agentotp,Verifyotp,sendotp,UserLogin,registerPost,getAllComplaints,getComplaintData,getcustomerById,getComplaints,getComplaintById,getAllEmployeesByID,createComplaint,getAllEmployeesByServiceType,sendingOtp,createAgent,createCertificate ,getAllCertificates ,getAllEmployees ,createCustomer,getAllEmployeesWithQR,getAllCustomers,updateCustomerStatus};
