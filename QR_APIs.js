@@ -7,9 +7,9 @@ const dotenv = require("dotenv").config();
 const Server=require("./mongodb/Server_Logic")
 app.use(bodyParser.json());
 app.use(express.json());
-app.use(cors());
 
 const logger = require('./logger/logger'); // Import the logger module
+app.use(cors());
 
 // const allowedOrigin = 'https://frontend-qrcode-i3zx-pfgbvslup-barnbas-projects.vercel.app';
 
@@ -213,6 +213,3 @@ app.get('/sendotp/:empId/:email', (req, res) => {
 app.listen(process.env.PORT, () => {
   logger.info(`Server is running on port ${process.env.PORT}`);
 }); 
-// app.listen(port, ip, () => {
-//   console.log(`Server listening on port http://${ip}:${port}`);
-// }); 
