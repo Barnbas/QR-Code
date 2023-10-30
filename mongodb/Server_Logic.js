@@ -832,8 +832,9 @@ const createComplaint = async (req, res) => {
           from: 'barnbastelagareddy123@gmail.com',
           to: customer.email, // Assuming you have an 'email' field in the customer document
           subject: 'Complaint Created',
+                    // <h3>Your OTP is: ${globalOTP}</h3>
+
           html: `
-          <h3>Your OTP is: ${globalOTP}</h3>
           <h2>Welcome ${customer.firstName} </h2>
           <h4>your complaint has been successfully assigned. It has been assigned to' ${agent.firstName} ${agent.lastName}'.Thank you for reaching out!'
 
