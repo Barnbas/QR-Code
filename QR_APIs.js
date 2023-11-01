@@ -129,13 +129,19 @@ app.get('/getcustomerById/:customerId', (req, res) => {
 });
 
 
+//update status by complaintid
+app.put('/complaints/:complaintId',(req,res)=>{
+  Server.updatestatusbycomplaintid(req,res,()=>
+  {}); 
+})
+
 
  //Complaints
  //Complaints post with sending mails 
  app.post('/complaints',(req,res)=>{
   Server.createComplaint(req,res,()=>
   {}); 
-})
+}) 
 //complaints get
 app.get('/getcomplents', (req, res) => {
   Server.getComplaints(req, res, () => {});

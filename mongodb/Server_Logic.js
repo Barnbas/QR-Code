@@ -719,10 +719,54 @@ const getAllComplaints = async (req, res) => {
   }
 };
 
+//update  customer status by complaint id
+const updatestatusbycomplaintid = async (req, res) => {
+  try {
+    const complaintId = req.params.complaintId;
+    const { status } = req.body;
+
+    console.log('Status data:', status);
+
+    const complaint = await Complaint.findOne({ complaintId: complaintId });
+
+    if (!complaint) {
+      return res.status(404).json({ error: 'Complaint not found' });
+    }
+
+    const customerId = complaint.customerId;
+
+    // Fetch the current customer status
+    const existingCustomer = await CustomerInfo.findOne({ customerId: customerId });
+    
+    // Check if the new status is the same as the existing status
+    if (existingCustomer && existingCustomer.status === status) {
+      return res.status(400).json({ error: 'Status is already updated' });
+    }
+
+    // Assuming you want to update the 'status' field in the Customer model
+    // Make sure that 'status' in the request body only contains the new status value
+    // For example: { "status": "NewStatusValue" }
+    if (status) {
+      const updateResult = await CustomerInfo.updateOne({ customerId: customerId }, { $set: { status: status } });
+      if (updateResult.modifiedCount === 0) {
+        console.log("line 754", updateResult.modifiedCount);
+        return res.status(500).json({ error: 'Error updating customer status' });
+      }
+    } else {
+      return res.status(400).json({ error: 'Invalid status value' });
+    }
+
+    const updatedCustomer = await CustomerInfo.findOne({ customerId: customerId });
+
+    res.status(200).json(updatedCustomer);
+  } catch (error) {
+    logger.error("line 758", error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+};
 
 
-
-
+ 
 const transporter = nodemailer.createTransport({
   service: 'Gmail', // e.g., 'Gmail'
   auth: {
@@ -1084,4 +1128,4 @@ function isValidEmail(email) {
 //   }
 // };
 
-module.exports = {getComplaintDataforagent,agentotp,Verifyotp,sendotp,UserLogin,registerPost,getAllComplaints,getComplaintData,getcustomerById,getComplaints,getComplaintById,getAllEmployeesByID,createComplaint,getAllEmployeesByServiceType,sendingOtp,createAgent,createCertificate ,getAllCertificates ,getAllEmployees ,createCustomer,getAllEmployeesWithQR,getAllCustomers,updateCustomerStatus};
+module.exports = {updatestatusbycomplaintid,getComplaintDataforagent,agentotp,Verifyotp,sendotp,UserLogin,registerPost,getAllComplaints,getComplaintData,getcustomerById,getComplaints,getComplaintById,getAllEmployeesByID,createComplaint,getAllEmployeesByServiceType,sendingOtp,createAgent,createCertificate ,getAllCertificates ,getAllEmployees ,createCustomer,getAllEmployeesWithQR,getAllCustomers,updateCustomerStatus};

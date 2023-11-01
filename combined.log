@@ -88,3 +88,443 @@ info: Server is running on port 2600
 info: QR_Code_Employee MongoDB Connected
 info: Server is running on port 2600
 info: QR_Code_Employee MongoDB Connected
+info: Server is running on port 2600
+info: QR_Code_Employee MongoDB Connected
+info: Server is running on port 2600
+info: QR_Code_Employee MongoDB Connected
+info: Server is running on port 2600
+info: Server is running on port 2600
+info: Server is running on port 2600
+info: QR_Code_Employee MongoDB Connected
+info: Server is running on port 2600
+info: Server is running on port 2600
+info: QR_Code_Employee MongoDB Connected
+info: Server is running on port 2600
+info: QR_Code_Employee MongoDB Connected
+info: Server is running on port 2600
+info: Server is running on port 2600
+info: QR_Code_Employee MongoDB Connected
+info: Server is running on port 2600
+info: QR_Code_Employee MongoDB Connected
+info: Server is running on port 2600
+info: QR_Code_Employee MongoDB Connected
+info: Server is running on port 2600
+info: QR_Code_Employee MongoDB Connected
+info: Server is running on port 2600
+info: QR_Code_Employee MongoDB Connected
+info: Server is running on port 2600
+info: QR_Code_Employee MongoDB Connected
+info: Server is running on port 2600
+info: QR_Code_Employee MongoDB Connected
+info: Server is running on port 2600
+info: Server is running on port 2600
+info: Server is running on port 2600
+info: QR_Code_Employee MongoDB Connected
+info: Server is running on port 2600
+info: Server is running on port 2600
+info: QR_Code_Employee MongoDB Connected
+info: Server is running on port 2600
+info: Server is running on port 2600
+info: QR_Code_Employee MongoDB Connected
+info: Server is running on port 2600
+info: Server is running on port 2600
+info: QR_Code_Employee MongoDB Connected
+error: Error fetching data: Cannot read properties of undefined (reading 'newStatus') {"stack":"TypeError: Cannot read properties of undefined (reading 'newStatus')\n    at Object.updatestatusbycomplaintid (D:\\QR_Backend\\QR-Code\\mongodb\\Server_Logic.js:743:20)\n    at processTicksAndRejections (node:internal/process/task_queues:96:5)"}
+info: Server is running on port 2600
+info: Server is running on port 2600
+info: QR_Code_Employee MongoDB Connected
+error: Error fetching data: Cannot read properties of undefined (reading 'newStatus') {"stack":"TypeError: Cannot read properties of undefined (reading 'newStatus')\n    at Object.updatestatusbycomplaintid (D:\\QR_Backend\\QR-Code\\mongodb\\Server_Logic.js:743:20)\n    at processTicksAndRejections (node:internal/process/task_queues:96:5)"}
+info: Server is running on port 2600
+info: Server is running on port 2600
+info: QR_Code_Employee MongoDB Connected
+error: Error fetching data: Cannot read properties of undefined (reading 'newStatus') {"stack":"TypeError: Cannot read properties of undefined (reading 'newStatus')\n    at Object.updatestatusbycomplaintid (D:\\QR_Backend\\QR-Code\\mongodb\\Server_Logic.js:743:20)\n    at processTicksAndRejections (node:internal/process/task_queues:96:5)"}
+info: Server is running on port 2600
+info: Server is running on port 2600
+info: QR_Code_Employee MongoDB Connected
+error: Error fetching data: Cannot read properties of undefined (reading 'status') {"stack":"TypeError: Cannot read properties of undefined (reading 'status')\n    at Object.updatestatusbycomplaintid (D:\\QR_Backend\\QR-Code\\mongodb\\Server_Logic.js:743:20)\n    at processTicksAndRejections (node:internal/process/task_queues:96:5)"}
+info: Server is running on port 2600
+info: QR_Code_Employee MongoDB Connected
+error: Error fetching data: Cannot read properties of undefined (reading 'status') {"stack":"TypeError: Cannot read properties of undefined (reading 'status')\n    at Object.updatestatusbycomplaintid (D:\\QR_Backend\\QR-Code\\mongodb\\Server_Logic.js:745:20)\n    at processTicksAndRejections (node:internal/process/task_queues:96:5)"}
+info: Server is running on port 2600
+info: QR_Code_Employee MongoDB Connected
+info: Server is running on port 2600
+info: QR_Code_Employee MongoDB Connected
+info: Server is running on port 2600
+info: QR_Code_Employee MongoDB Connected
+info: Server is running on port 2600
+info: QR_Code_Employee MongoDB Connected
+info: Server is running on port 2600
+info: QR_Code_Employee MongoDB Connected
+info: Server is running on port 2600
+info: QR_Code_Employee MongoDB Connected
+info: Server is running on port 2600
+info: QR_Code_Employee MongoDB Connected
+error: Error updating customer status: a circular reference in the update value, updateValue:
+{
+  status: ServerResponse {
+    _events: [Object: null prototype],
+    _eventsCount: 1,
+    _maxListeners: undefined,
+    outputData: [],
+    outputSize: 0,
+    writable: true,
+    destroyed: false,
+    _last: false,
+    chunkedEncoding: false,
+    shouldKeepAlive: true,
+    maxRequestsOnConnectionReached: false,
+    _defaultKeepAlive: true,
+    useChunkedEncodingByDefault: true,
+    sendDate: true,
+    _removedConnection: false,
+    _removedContLen: false,
+    _removedTE: false,
+    _contentLength: null,
+    _hasBody: true,
+    _trailer: '',
+    finished: false,
+    _headerSent: false,
+    _closed: false,
+    socket: [Socket],
+    _header: null,
+    _keepAliveTimeout: 5000,
+    _onPendingData: [Function: bound updateOutgoingData],
+    req: [IncomingMessage],
+    _sent100: false,
+    _expect_continue: false,
+    locals: [Object: null prototype] {},
+    [Symbol(kCapture)]: false,
+    [Symbol(kNeedDrain)]: false,
+    [Symbol(corked)]: 0,
+    [Symbol(kOutHeaders)]: [Object: null prototype]
+  }
+}
+updatePath: '' {"stack":"MongooseError: a circular reference in the update value, updateValue:\n{\n  status: ServerResponse {\n    _events: [Object: null prototype],\n    _eventsCount: 1,\n    _maxListeners: undefined,\n    outputData: [],\n    outputSize: 0,\n    writable: true,\n    destroyed: false,\n    _last: false,\n    chunkedEncoding: false,\n    shouldKeepAlive: true,\n    maxRequestsOnConnectionReached: false,\n    _defaultKeepAlive: true,\n    useChunkedEncodingByDefault: true,\n    sendDate: true,\n    _removedConnection: false,\n    _removedContLen: false,\n    _removedTE: false,\n    _contentLength: null,\n    _hasBody: true,\n    _trailer: '',\n    finished: false,\n    _headerSent: false,\n    _closed: false,\n    socket: [Socket],\n    _header: null,\n    _keepAliveTimeout: 5000,\n    _onPendingData: [Function: bound updateOutgoingData],\n    req: [IncomingMessage],\n    _sent100: false,\n    _expect_continue: false,\n    locals: [Object: null prototype] {},\n    [Symbol(kCapture)]: false,\n    [Symbol(kNeedDrain)]: false,\n    [Symbol(corked)]: 0,\n    [Symbol(kOutHeaders)]: [Object: null prototype]\n  }\n}\nupdatePath: ''\n    at modifiedPaths (D:\\QR_Backend\\QR-Code\\node_modules\\mongoose\\lib\\helpers\\common.js:85:11)\n    at modifiedPaths (D:\\QR_Backend\\QR-Code\\node_modules\\mongoose\\lib\\helpers\\common.js:106:7)\n    at modifiedPaths (D:\\QR_Backend\\QR-Code\\node_modules\\mongoose\\lib\\helpers\\common.js:106:7)\n    at modifiedPaths (D:\\QR_Backend\\QR-Code\\node_modules\\mongoose\\lib\\helpers\\common.js:106:7)\n    at modifiedPaths (D:\\QR_Backend\\QR-Code\\node_modules\\mongoose\\lib\\helpers\\common.js:106:7)\n    at modifiedPaths (D:\\QR_Backend\\QR-Code\\node_modules\\mongoose\\lib\\helpers\\update\\modifiedPaths.js:24:7)\n    at updatedPathsByArrayFilter (D:\\QR_Backend\\QR-Code\\node_modules\\mongoose\\lib\\helpers\\update\\updatedPathsByArrayFilter.js:9:24)\n    at castArrayFilters (D:\\QR_Backend\\QR-Code\\node_modules\\mongoose\\lib\\helpers\\update\\castArrayFilters.js:12:32)\n    at _castArrayFilters (D:\\QR_Backend\\QR-Code\\node_modules\\mongoose\\lib\\query.js:2245:5)\n    at model.Query._findOneAndUpdate (D:\\QR_Backend\\QR-Code\\node_modules\\mongoose\\lib\\query.js:3306:3)"}
+info: Server is running on port 2600
+info: QR_Code_Employee MongoDB Connected
+info: Server is running on port 2600
+info: Server is running on port 2600
+error: Error updating customer status: a circular reference in the update value, updateValue:
+{
+  status: ServerResponse {
+    _events: [Object: null prototype],
+    _eventsCount: 1,
+    _maxListeners: undefined,
+    outputData: [],
+    outputSize: 0,
+    writable: true,
+    destroyed: false,
+    _last: false,
+    chunkedEncoding: false,
+    shouldKeepAlive: true,
+    maxRequestsOnConnectionReached: false,
+    _defaultKeepAlive: true,
+    useChunkedEncodingByDefault: true,
+    sendDate: true,
+    _removedConnection: false,
+    _removedContLen: false,
+    _removedTE: false,
+    _contentLength: null,
+    _hasBody: true,
+    _trailer: '',
+    finished: false,
+    _headerSent: false,
+    _closed: false,
+    socket: [Socket],
+    _header: null,
+    _keepAliveTimeout: 5000,
+    _onPendingData: [Function: bound updateOutgoingData],
+    req: [IncomingMessage],
+    _sent100: false,
+    _expect_continue: false,
+    locals: [Object: null prototype] {},
+    [Symbol(kCapture)]: false,
+    [Symbol(kNeedDrain)]: false,
+    [Symbol(corked)]: 0,
+    [Symbol(kOutHeaders)]: [Object: null prototype]
+  }
+}
+updatePath: '' {"stack":"MongooseError: a circular reference in the update value, updateValue:\n{\n  status: ServerResponse {\n    _events: [Object: null prototype],\n    _eventsCount: 1,\n    _maxListeners: undefined,\n    outputData: [],\n    outputSize: 0,\n    writable: true,\n    destroyed: false,\n    _last: false,\n    chunkedEncoding: false,\n    shouldKeepAlive: true,\n    maxRequestsOnConnectionReached: false,\n    _defaultKeepAlive: true,\n    useChunkedEncodingByDefault: true,\n    sendDate: true,\n    _removedConnection: false,\n    _removedContLen: false,\n    _removedTE: false,\n    _contentLength: null,\n    _hasBody: true,\n    _trailer: '',\n    finished: false,\n    _headerSent: false,\n    _closed: false,\n    socket: [Socket],\n    _header: null,\n    _keepAliveTimeout: 5000,\n    _onPendingData: [Function: bound updateOutgoingData],\n    req: [IncomingMessage],\n    _sent100: false,\n    _expect_continue: false,\n    locals: [Object: null prototype] {},\n    [Symbol(kCapture)]: false,\n    [Symbol(kNeedDrain)]: false,\n    [Symbol(corked)]: 0,\n    [Symbol(kOutHeaders)]: [Object: null prototype]\n  }\n}\nupdatePath: ''\n    at modifiedPaths (D:\\QR_Backend\\QR-Code\\node_modules\\mongoose\\lib\\helpers\\common.js:85:11)\n    at modifiedPaths (D:\\QR_Backend\\QR-Code\\node_modules\\mongoose\\lib\\helpers\\common.js:106:7)\n    at modifiedPaths (D:\\QR_Backend\\QR-Code\\node_modules\\mongoose\\lib\\helpers\\common.js:106:7)\n    at modifiedPaths (D:\\QR_Backend\\QR-Code\\node_modules\\mongoose\\lib\\helpers\\common.js:106:7)\n    at modifiedPaths (D:\\QR_Backend\\QR-Code\\node_modules\\mongoose\\lib\\helpers\\common.js:106:7)\n    at modifiedPaths (D:\\QR_Backend\\QR-Code\\node_modules\\mongoose\\lib\\helpers\\update\\modifiedPaths.js:24:7)\n    at updatedPathsByArrayFilter (D:\\QR_Backend\\QR-Code\\node_modules\\mongoose\\lib\\helpers\\update\\updatedPathsByArrayFilter.js:9:24)\n    at castArrayFilters (D:\\QR_Backend\\QR-Code\\node_modules\\mongoose\\lib\\helpers\\update\\castArrayFilters.js:12:32)\n    at _castArrayFilters (D:\\QR_Backend\\QR-Code\\node_modules\\mongoose\\lib\\query.js:2245:5)\n    at model.Query._findOneAndUpdate (D:\\QR_Backend\\QR-Code\\node_modules\\mongoose\\lib\\query.js:3306:3)"}
+info: Server is running on port 2600
+info: QR_Code_Employee MongoDB Connected
+info: Server is running on port 2600
+info: QR_Code_Employee MongoDB Connected
+error: Error updating customer status: a circular reference in the update value, updateValue:
+{
+  status: ServerResponse {
+    _events: [Object: null prototype],
+    _eventsCount: 1,
+    _maxListeners: undefined,
+    outputData: [],
+    outputSize: 0,
+    writable: true,
+    destroyed: false,
+    _last: false,
+    chunkedEncoding: false,
+    shouldKeepAlive: true,
+    maxRequestsOnConnectionReached: false,
+    _defaultKeepAlive: true,
+    useChunkedEncodingByDefault: true,
+    sendDate: true,
+    _removedConnection: false,
+    _removedContLen: false,
+    _removedTE: false,
+    _contentLength: null,
+    _hasBody: true,
+    _trailer: '',
+    finished: false,
+    _headerSent: false,
+    _closed: false,
+    socket: [Socket],
+    _header: null,
+    _keepAliveTimeout: 5000,
+    _onPendingData: [Function: bound updateOutgoingData],
+    req: [IncomingMessage],
+    _sent100: false,
+    _expect_continue: false,
+    locals: [Object: null prototype] {},
+    [Symbol(kCapture)]: false,
+    [Symbol(kNeedDrain)]: false,
+    [Symbol(corked)]: 0,
+    [Symbol(kOutHeaders)]: [Object: null prototype]
+  }
+}
+updatePath: '' {"stack":"MongooseError: a circular reference in the update value, updateValue:\n{\n  status: ServerResponse {\n    _events: [Object: null prototype],\n    _eventsCount: 1,\n    _maxListeners: undefined,\n    outputData: [],\n    outputSize: 0,\n    writable: true,\n    destroyed: false,\n    _last: false,\n    chunkedEncoding: false,\n    shouldKeepAlive: true,\n    maxRequestsOnConnectionReached: false,\n    _defaultKeepAlive: true,\n    useChunkedEncodingByDefault: true,\n    sendDate: true,\n    _removedConnection: false,\n    _removedContLen: false,\n    _removedTE: false,\n    _contentLength: null,\n    _hasBody: true,\n    _trailer: '',\n    finished: false,\n    _headerSent: false,\n    _closed: false,\n    socket: [Socket],\n    _header: null,\n    _keepAliveTimeout: 5000,\n    _onPendingData: [Function: bound updateOutgoingData],\n    req: [IncomingMessage],\n    _sent100: false,\n    _expect_continue: false,\n    locals: [Object: null prototype] {},\n    [Symbol(kCapture)]: false,\n    [Symbol(kNeedDrain)]: false,\n    [Symbol(corked)]: 0,\n    [Symbol(kOutHeaders)]: [Object: null prototype]\n  }\n}\nupdatePath: ''\n    at modifiedPaths (D:\\QR_Backend\\QR-Code\\node_modules\\mongoose\\lib\\helpers\\common.js:85:11)\n    at modifiedPaths (D:\\QR_Backend\\QR-Code\\node_modules\\mongoose\\lib\\helpers\\common.js:106:7)\n    at modifiedPaths (D:\\QR_Backend\\QR-Code\\node_modules\\mongoose\\lib\\helpers\\common.js:106:7)\n    at modifiedPaths (D:\\QR_Backend\\QR-Code\\node_modules\\mongoose\\lib\\helpers\\common.js:106:7)\n    at modifiedPaths (D:\\QR_Backend\\QR-Code\\node_modules\\mongoose\\lib\\helpers\\common.js:106:7)\n    at modifiedPaths (D:\\QR_Backend\\QR-Code\\node_modules\\mongoose\\lib\\helpers\\update\\modifiedPaths.js:24:7)\n    at updatedPathsByArrayFilter (D:\\QR_Backend\\QR-Code\\node_modules\\mongoose\\lib\\helpers\\update\\updatedPathsByArrayFilter.js:9:24)\n    at castArrayFilters (D:\\QR_Backend\\QR-Code\\node_modules\\mongoose\\lib\\helpers\\update\\castArrayFilters.js:12:32)\n    at _castArrayFilters (D:\\QR_Backend\\QR-Code\\node_modules\\mongoose\\lib\\query.js:2245:5)\n    at model.Query._findOneAndUpdate (D:\\QR_Backend\\QR-Code\\node_modules\\mongoose\\lib\\query.js:3306:3)"}
+info: Server is running on port 2600
+info: QR_Code_Employee MongoDB Connected
+error: Error updating customer status: a circular reference in the update value, updateValue:
+{
+  status: ServerResponse {
+    _events: [Object: null prototype],
+    _eventsCount: 1,
+    _maxListeners: undefined,
+    outputData: [],
+    outputSize: 0,
+    writable: true,
+    destroyed: false,
+    _last: false,
+    chunkedEncoding: false,
+    shouldKeepAlive: true,
+    maxRequestsOnConnectionReached: false,
+    _defaultKeepAlive: true,
+    useChunkedEncodingByDefault: true,
+    sendDate: true,
+    _removedConnection: false,
+    _removedContLen: false,
+    _removedTE: false,
+    _contentLength: null,
+    _hasBody: true,
+    _trailer: '',
+    finished: false,
+    _headerSent: false,
+    _closed: false,
+    socket: [Socket],
+    _header: null,
+    _keepAliveTimeout: 5000,
+    _onPendingData: [Function: bound updateOutgoingData],
+    req: [IncomingMessage],
+    _sent100: false,
+    _expect_continue: false,
+    locals: [Object: null prototype] {},
+    [Symbol(kCapture)]: false,
+    [Symbol(kNeedDrain)]: false,
+    [Symbol(corked)]: 0,
+    [Symbol(kOutHeaders)]: [Object: null prototype]
+  }
+}
+updatePath: '' {"stack":"MongooseError: a circular reference in the update value, updateValue:\n{\n  status: ServerResponse {\n    _events: [Object: null prototype],\n    _eventsCount: 1,\n    _maxListeners: undefined,\n    outputData: [],\n    outputSize: 0,\n    writable: true,\n    destroyed: false,\n    _last: false,\n    chunkedEncoding: false,\n    shouldKeepAlive: true,\n    maxRequestsOnConnectionReached: false,\n    _defaultKeepAlive: true,\n    useChunkedEncodingByDefault: true,\n    sendDate: true,\n    _removedConnection: false,\n    _removedContLen: false,\n    _removedTE: false,\n    _contentLength: null,\n    _hasBody: true,\n    _trailer: '',\n    finished: false,\n    _headerSent: false,\n    _closed: false,\n    socket: [Socket],\n    _header: null,\n    _keepAliveTimeout: 5000,\n    _onPendingData: [Function: bound updateOutgoingData],\n    req: [IncomingMessage],\n    _sent100: false,\n    _expect_continue: false,\n    locals: [Object: null prototype] {},\n    [Symbol(kCapture)]: false,\n    [Symbol(kNeedDrain)]: false,\n    [Symbol(corked)]: 0,\n    [Symbol(kOutHeaders)]: [Object: null prototype]\n  }\n}\nupdatePath: ''\n    at modifiedPaths (D:\\QR_Backend\\QR-Code\\node_modules\\mongoose\\lib\\helpers\\common.js:85:11)\n    at modifiedPaths (D:\\QR_Backend\\QR-Code\\node_modules\\mongoose\\lib\\helpers\\common.js:106:7)\n    at modifiedPaths (D:\\QR_Backend\\QR-Code\\node_modules\\mongoose\\lib\\helpers\\common.js:106:7)\n    at modifiedPaths (D:\\QR_Backend\\QR-Code\\node_modules\\mongoose\\lib\\helpers\\common.js:106:7)\n    at modifiedPaths (D:\\QR_Backend\\QR-Code\\node_modules\\mongoose\\lib\\helpers\\common.js:106:7)\n    at modifiedPaths (D:\\QR_Backend\\QR-Code\\node_modules\\mongoose\\lib\\helpers\\update\\modifiedPaths.js:24:7)\n    at updatedPathsByArrayFilter (D:\\QR_Backend\\QR-Code\\node_modules\\mongoose\\lib\\helpers\\update\\updatedPathsByArrayFilter.js:9:24)\n    at castArrayFilters (D:\\QR_Backend\\QR-Code\\node_modules\\mongoose\\lib\\helpers\\update\\castArrayFilters.js:12:32)\n    at _castArrayFilters (D:\\QR_Backend\\QR-Code\\node_modules\\mongoose\\lib\\query.js:2245:5)\n    at model.Query._findOneAndUpdate (D:\\QR_Backend\\QR-Code\\node_modules\\mongoose\\lib\\query.js:3306:3)"}
+info: Server is running on port 2600
+info: QR_Code_Employee MongoDB Connected
+info: Server is running on port 2600
+info: Server is running on port 2600
+info: QR_Code_Employee MongoDB Connected
+info: Server is running on port 2600
+info: QR_Code_Employee MongoDB Connected
+error: Error updating customer status: a circular reference in the update value, updateValue:
+{
+  status: ServerResponse {
+    _events: [Object: null prototype],
+    _eventsCount: 1,
+    _maxListeners: undefined,
+    outputData: [],
+    outputSize: 0,
+    writable: true,
+    destroyed: false,
+    _last: false,
+    chunkedEncoding: false,
+    shouldKeepAlive: true,
+    maxRequestsOnConnectionReached: false,
+    _defaultKeepAlive: true,
+    useChunkedEncodingByDefault: true,
+    sendDate: true,
+    _removedConnection: false,
+    _removedContLen: false,
+    _removedTE: false,
+    _contentLength: null,
+    _hasBody: true,
+    _trailer: '',
+    finished: false,
+    _headerSent: false,
+    _closed: false,
+    socket: [Socket],
+    _header: null,
+    _keepAliveTimeout: 5000,
+    _onPendingData: [Function: bound updateOutgoingData],
+    req: [IncomingMessage],
+    _sent100: false,
+    _expect_continue: false,
+    locals: [Object: null prototype] {},
+    [Symbol(kCapture)]: false,
+    [Symbol(kNeedDrain)]: false,
+    [Symbol(corked)]: 0,
+    [Symbol(kOutHeaders)]: [Object: null prototype]
+  }
+}
+updatePath: '' {"stack":"MongooseError: a circular reference in the update value, updateValue:\n{\n  status: ServerResponse {\n    _events: [Object: null prototype],\n    _eventsCount: 1,\n    _maxListeners: undefined,\n    outputData: [],\n    outputSize: 0,\n    writable: true,\n    destroyed: false,\n    _last: false,\n    chunkedEncoding: false,\n    shouldKeepAlive: true,\n    maxRequestsOnConnectionReached: false,\n    _defaultKeepAlive: true,\n    useChunkedEncodingByDefault: true,\n    sendDate: true,\n    _removedConnection: false,\n    _removedContLen: false,\n    _removedTE: false,\n    _contentLength: null,\n    _hasBody: true,\n    _trailer: '',\n    finished: false,\n    _headerSent: false,\n    _closed: false,\n    socket: [Socket],\n    _header: null,\n    _keepAliveTimeout: 5000,\n    _onPendingData: [Function: bound updateOutgoingData],\n    req: [IncomingMessage],\n    _sent100: false,\n    _expect_continue: false,\n    locals: [Object: null prototype] {},\n    [Symbol(kCapture)]: false,\n    [Symbol(kNeedDrain)]: false,\n    [Symbol(corked)]: 0,\n    [Symbol(kOutHeaders)]: [Object: null prototype]\n  }\n}\nupdatePath: ''\n    at modifiedPaths (D:\\QR_Backend\\QR-Code\\node_modules\\mongoose\\lib\\helpers\\common.js:85:11)\n    at modifiedPaths (D:\\QR_Backend\\QR-Code\\node_modules\\mongoose\\lib\\helpers\\common.js:106:7)\n    at modifiedPaths (D:\\QR_Backend\\QR-Code\\node_modules\\mongoose\\lib\\helpers\\common.js:106:7)\n    at modifiedPaths (D:\\QR_Backend\\QR-Code\\node_modules\\mongoose\\lib\\helpers\\common.js:106:7)\n    at modifiedPaths (D:\\QR_Backend\\QR-Code\\node_modules\\mongoose\\lib\\helpers\\common.js:106:7)\n    at modifiedPaths (D:\\QR_Backend\\QR-Code\\node_modules\\mongoose\\lib\\helpers\\update\\modifiedPaths.js:24:7)\n    at updatedPathsByArrayFilter (D:\\QR_Backend\\QR-Code\\node_modules\\mongoose\\lib\\helpers\\update\\updatedPathsByArrayFilter.js:9:24)\n    at castArrayFilters (D:\\QR_Backend\\QR-Code\\node_modules\\mongoose\\lib\\helpers\\update\\castArrayFilters.js:12:32)\n    at _castArrayFilters (D:\\QR_Backend\\QR-Code\\node_modules\\mongoose\\lib\\query.js:2245:5)\n    at model.Query._findOneAndUpdate (D:\\QR_Backend\\QR-Code\\node_modules\\mongoose\\lib\\query.js:3306:3)"}
+info: Server is running on port 2600
+info: QR_Code_Employee MongoDB Connected
+info: Server is running on port 2600
+info: QR_Code_Employee MongoDB Connected
+info: Server is running on port 2600
+info: Server is running on port 2600
+info: QR_Code_Employee MongoDB Connected
+info: Server is running on port 2600
+info: Server is running on port 2600
+info: Server is running on port 2600
+info: QR_Code_Employee MongoDB Connected
+info: Server is running on port 2600
+info: Server is running on port 2600
+info: Server is running on port 2600
+info: QR_Code_Employee MongoDB Connected
+info: Server is running on port 2600
+info: Server is running on port 2600
+info: Server is running on port 2600
+info: Server is running on port 2600
+info: Server is running on port 2600
+info: Server is running on port 2600
+error: Cast to ObjectId failed for value "CM4002" (type string) at path "_id" for model "Complaint" {"kind":"ObjectId","path":"_id","reason":{},"stringValue":"\"CM4002\"","value":"CM4002","valueType":"string"}
+info: QR_Code_Employee MongoDB Connected
+info: Server is running on port 2600
+info: Server is running on port 2600
+info: QR_Code_Employee MongoDB Connected
+info: Server is running on port 2600
+error: Cast to ObjectId failed for value "CM4002" (type string) at path "_id" for model "Complaint" {"kind":"ObjectId","path":"_id","reason":{},"stringValue":"\"CM4002\"","value":"CM4002","valueType":"string"}
+info: QR_Code_Employee MongoDB Connected
+info: Server is running on port 2600
+info: QR_Code_Employee MongoDB Connected
+info: Server is running on port 2600
+info: QR_Code_Employee MongoDB Connected
+info: Server is running on port 2600
+info: QR_Code_Employee MongoDB Connected
+info: Server is running on port 2600
+info: QR_Code_Employee MongoDB Connected
+info: Server is running on port 2600
+info: QR_Code_Employee MongoDB Connected
+info: Server is running on port 2600
+info: QR_Code_Employee MongoDB Connected
+info: Server is running on port 2600
+info: Server is running on port 2600
+info: QR_Code_Employee MongoDB Connected
+info: Server is running on port 2600
+info: QR_Code_Employee MongoDB Connected
+info: Server is running on port 2600
+info: Server is running on port 2600
+info: QR_Code_Employee MongoDB Connected
+info: Server is running on port 2600
+info: Server is running on port 2600
+error: line 758 Cast to ObjectId failed for value "CM4002" (type string) at path "_id" for model "Complaint" {"kind":"ObjectId","path":"_id","reason":{},"stack":"CastError: Cast to ObjectId failed for value \"CM4002\" (type string) at path \"_id\" for model \"Complaint\"\n    at ObjectId.cast (D:\\QR_Backend\\QR-Code\\node_modules\\mongoose\\lib\\schema\\objectid.js:250:11)\n    at ObjectId.SchemaType.applySetters (D:\\QR_Backend\\QR-Code\\node_modules\\mongoose\\lib\\schematype.js:1219:12)\n    at ObjectId.SchemaType.castForQuery (D:\\QR_Backend\\QR-Code\\node_modules\\mongoose\\lib\\schematype.js:1631:15)\n    at cast (D:\\QR_Backend\\QR-Code\\node_modules\\mongoose\\lib\\cast.js:375:32)\n    at model.Query.Query.cast (D:\\QR_Backend\\QR-Code\\node_modules\\mongoose\\lib\\query.js:4910:12)\n    at model.Query.Query._castConditions (D:\\QR_Backend\\QR-Code\\node_modules\\mongoose\\lib\\query.js:2232:10)\n    at model.Query._findOne (D:\\QR_Backend\\QR-Code\\node_modules\\mongoose\\lib\\query.js:2519:8)\n    at model.Query.exec (D:\\QR_Backend\\QR-Code\\node_modules\\mongoose\\lib\\query.js:4430:28)\n    at processTicksAndRejections (node:internal/process/task_queues:96:5)\n    at async Object.updatestatusbycomplaintid (D:\\QR_Backend\\QR-Code\\mongodb\\Server_Logic.js:730:23)","stringValue":"\"CM4002\"","value":"CM4002","valueType":"string"}
+info: QR_Code_Employee MongoDB Connected
+error: line 758 Cast to ObjectId failed for value ""CM4002"" (type string) at path "_id" for model "Complaint" {"kind":"ObjectId","path":"_id","reason":{},"stack":"CastError: Cast to ObjectId failed for value \"\"CM4002\"\" (type string) at path \"_id\" for model \"Complaint\"\n    at ObjectId.cast (D:\\QR_Backend\\QR-Code\\node_modules\\mongoose\\lib\\schema\\objectid.js:250:11)\n    at ObjectId.SchemaType.applySetters (D:\\QR_Backend\\QR-Code\\node_modules\\mongoose\\lib\\schematype.js:1219:12)\n    at ObjectId.SchemaType.castForQuery (D:\\QR_Backend\\QR-Code\\node_modules\\mongoose\\lib\\schematype.js:1631:15)\n    at cast (D:\\QR_Backend\\QR-Code\\node_modules\\mongoose\\lib\\cast.js:375:32)\n    at model.Query.Query.cast (D:\\QR_Backend\\QR-Code\\node_modules\\mongoose\\lib\\query.js:4910:12)\n    at model.Query.Query._castConditions (D:\\QR_Backend\\QR-Code\\node_modules\\mongoose\\lib\\query.js:2232:10)\n    at model.Query._findOne (D:\\QR_Backend\\QR-Code\\node_modules\\mongoose\\lib\\query.js:2519:8)\n    at model.Query.exec (D:\\QR_Backend\\QR-Code\\node_modules\\mongoose\\lib\\query.js:4430:28)\n    at processTicksAndRejections (node:internal/process/task_queues:96:5)\n    at async Object.updatestatusbycomplaintid (D:\\QR_Backend\\QR-Code\\mongodb\\Server_Logic.js:730:23)","stringValue":"\"\"CM4002\"\"","value":"\"CM4002\"","valueType":"string"}
+info: Server is running on port 2600
+error: line 758 Cast to ObjectId failed for value "CM4002" (type string) at path "_id" for model "Complaint" {"kind":"ObjectId","path":"_id","reason":{},"stack":"CastError: Cast to ObjectId failed for value \"CM4002\" (type string) at path \"_id\" for model \"Complaint\"\n    at ObjectId.cast (D:\\QR_Backend\\QR-Code\\node_modules\\mongoose\\lib\\schema\\objectid.js:250:11)\n    at ObjectId.SchemaType.applySetters (D:\\QR_Backend\\QR-Code\\node_modules\\mongoose\\lib\\schematype.js:1219:12)\n    at ObjectId.SchemaType.castForQuery (D:\\QR_Backend\\QR-Code\\node_modules\\mongoose\\lib\\schematype.js:1631:15)\n    at cast (D:\\QR_Backend\\QR-Code\\node_modules\\mongoose\\lib\\cast.js:375:32)\n    at model.Query.Query.cast (D:\\QR_Backend\\QR-Code\\node_modules\\mongoose\\lib\\query.js:4910:12)\n    at model.Query.Query._castConditions (D:\\QR_Backend\\QR-Code\\node_modules\\mongoose\\lib\\query.js:2232:10)\n    at model.Query._findOne (D:\\QR_Backend\\QR-Code\\node_modules\\mongoose\\lib\\query.js:2519:8)\n    at model.Query.exec (D:\\QR_Backend\\QR-Code\\node_modules\\mongoose\\lib\\query.js:4430:28)\n    at processTicksAndRejections (node:internal/process/task_queues:96:5)\n    at async Object.updatestatusbycomplaintid (D:\\QR_Backend\\QR-Code\\mongodb\\Server_Logic.js:730:23)","stringValue":"\"CM4002\"","value":"CM4002","valueType":"string"}
+info: QR_Code_Employee MongoDB Connected
+info: Server is running on port 2600
+info: QR_Code_Employee MongoDB Connected
+error: line 758 Cast to ObjectId failed for value "CM4002" (type string) at path "_id" for model "Complaint" {"kind":"ObjectId","path":"_id","reason":{},"stack":"CastError: Cast to ObjectId failed for value \"CM4002\" (type string) at path \"_id\" for model \"Complaint\"\n    at ObjectId.cast (D:\\QR_Backend\\QR-Code\\node_modules\\mongoose\\lib\\schema\\objectid.js:250:11)\n    at ObjectId.SchemaType.applySetters (D:\\QR_Backend\\QR-Code\\node_modules\\mongoose\\lib\\schematype.js:1219:12)\n    at ObjectId.SchemaType.castForQuery (D:\\QR_Backend\\QR-Code\\node_modules\\mongoose\\lib\\schematype.js:1631:15)\n    at cast (D:\\QR_Backend\\QR-Code\\node_modules\\mongoose\\lib\\cast.js:375:32)\n    at model.Query.Query.cast (D:\\QR_Backend\\QR-Code\\node_modules\\mongoose\\lib\\query.js:4910:12)\n    at model.Query.Query._castConditions (D:\\QR_Backend\\QR-Code\\node_modules\\mongoose\\lib\\query.js:2232:10)\n    at model.Query._findOne (D:\\QR_Backend\\QR-Code\\node_modules\\mongoose\\lib\\query.js:2519:8)\n    at model.Query.exec (D:\\QR_Backend\\QR-Code\\node_modules\\mongoose\\lib\\query.js:4430:28)\n    at processTicksAndRejections (node:internal/process/task_queues:96:5)\n    at async Object.updatestatusbycomplaintid (D:\\QR_Backend\\QR-Code\\mongodb\\Server_Logic.js:730:23)","stringValue":"\"CM4002\"","value":"CM4002","valueType":"string"}
+info: Server is running on port 2600
+info: Server is running on port 2600
+info: Server is running on port 2600
+info: QR_Code_Employee MongoDB Connected
+info: Server is running on port 2600
+info: Server is running on port 2600
+info: Server is running on port 2600
+info: QR_Code_Employee MongoDB Connected
+info: Server is running on port 2600
+info: Server is running on port 2600
+info: QR_Code_Employee MongoDB Connected
+info: Server is running on port 2600
+info: Server is running on port 2600
+info: Server is running on port 2600
+info: QR_Code_Employee MongoDB Connected
+info: Server is running on port 2600
+info: QR_Code_Employee MongoDB Connected
+info: Server is running on port 2600
+info: QR_Code_Employee MongoDB Connected
+info: Server is running on port 2600
+error: line 758 Cast to ObjectId failed for value "CM4002" (type string) at path "_id" for model "Complaint" {"kind":"ObjectId","path":"_id","reason":{},"stack":"CastError: Cast to ObjectId failed for value \"CM4002\" (type string) at path \"_id\" for model \"Complaint\"\n    at ObjectId.cast (D:\\QR_Backend\\QR-Code\\node_modules\\mongoose\\lib\\schema\\objectid.js:250:11)\n    at ObjectId.SchemaType.applySetters (D:\\QR_Backend\\QR-Code\\node_modules\\mongoose\\lib\\schematype.js:1219:12)\n    at ObjectId.SchemaType.castForQuery (D:\\QR_Backend\\QR-Code\\node_modules\\mongoose\\lib\\schematype.js:1631:15)\n    at cast (D:\\QR_Backend\\QR-Code\\node_modules\\mongoose\\lib\\cast.js:375:32)\n    at model.Query.Query.cast (D:\\QR_Backend\\QR-Code\\node_modules\\mongoose\\lib\\query.js:4910:12)\n    at model.Query.Query._castConditions (D:\\QR_Backend\\QR-Code\\node_modules\\mongoose\\lib\\query.js:2232:10)\n    at model.Query._findOne (D:\\QR_Backend\\QR-Code\\node_modules\\mongoose\\lib\\query.js:2519:8)\n    at model.Query.exec (D:\\QR_Backend\\QR-Code\\node_modules\\mongoose\\lib\\query.js:4430:28)\n    at processTicksAndRejections (node:internal/process/task_queues:96:5)\n    at async Object.updatestatusbycomplaintid (D:\\QR_Backend\\QR-Code\\mongodb\\Server_Logic.js:731:23)","stringValue":"\"CM4002\"","value":"CM4002","valueType":"string"}
+info: QR_Code_Employee MongoDB Connected
+info: Server is running on port 2600
+info: QR_Code_Employee MongoDB Connected
+error: line 758 Cast to ObjectId failed for value "CU2000" (type string) at path "_id" for model "CustomerInfo" {"kind":"ObjectId","path":"_id","reason":{},"stack":"CastError: Cast to ObjectId failed for value \"CU2000\" (type string) at path \"_id\" for model \"CustomerInfo\"\n    at ObjectId.cast (D:\\QR_Backend\\QR-Code\\node_modules\\mongoose\\lib\\schema\\objectid.js:250:11)\n    at ObjectId.SchemaType.applySetters (D:\\QR_Backend\\QR-Code\\node_modules\\mongoose\\lib\\schematype.js:1219:12)\n    at ObjectId.SchemaType.castForQuery (D:\\QR_Backend\\QR-Code\\node_modules\\mongoose\\lib\\schematype.js:1631:15)\n    at cast (D:\\QR_Backend\\QR-Code\\node_modules\\mongoose\\lib\\cast.js:375:32)\n    at model.Query.Query.cast (D:\\QR_Backend\\QR-Code\\node_modules\\mongoose\\lib\\query.js:4910:12)\n    at model.Query.Query._castConditions (D:\\QR_Backend\\QR-Code\\node_modules\\mongoose\\lib\\query.js:2232:10)\n    at model.Query._updateThunk (D:\\QR_Backend\\QR-Code\\node_modules\\mongoose\\lib\\query.js:3855:8)\n    at model.Query._updateOne (D:\\QR_Backend\\QR-Code\\node_modules\\mongoose\\lib\\query.js:3965:23)\n    at model.Query.exec (D:\\QR_Backend\\QR-Code\\node_modules\\mongoose\\lib\\query.js:4430:28)\n    at processTicksAndRejections (node:internal/process/task_queues:96:5)","stringValue":"\"CU2000\"","value":"CU2000","valueType":"string"}
+info: Server is running on port 2600
+info: QR_Code_Employee MongoDB Connected
+info: Server is running on port 2600
+info: Server is running on port 2600
+info: Server is running on port 2600
+info: Server is running on port 2600
+info: Server is running on port 2600
+info: Server is running on port 2600
+info: Server is running on port 2600
+info: QR_Code_Employee MongoDB Connected
+info: Server is running on port 2600
+info: QR_Code_Employee MongoDB Connected
+info: Server is running on port 2600
+info: QR_Code_Employee MongoDB Connected
+info: Server is running on port 2600
+info: QR_Code_Employee MongoDB Connected
+info: Server is running on port 2600
+info: QR_Code_Employee MongoDB Connected
+info: Server is running on port 2600
+info: QR_Code_Employee MongoDB Connected
+info: Server is running on port 2600
+info: QR_Code_Employee MongoDB Connected
+info: Server is running on port 2600
+info: QR_Code_Employee MongoDB Connected
+error: line 758 Cast to ObjectId failed for value "CU2000" (type string) at path "_id" for model "CustomerInfo" {"kind":"ObjectId","path":"_id","reason":{},"stack":"CastError: Cast to ObjectId failed for value \"CU2000\" (type string) at path \"_id\" for model \"CustomerInfo\"\n    at ObjectId.cast (D:\\QR_Backend\\QR-Code\\node_modules\\mongoose\\lib\\schema\\objectid.js:250:11)\n    at ObjectId.SchemaType.applySetters (D:\\QR_Backend\\QR-Code\\node_modules\\mongoose\\lib\\schematype.js:1219:12)\n    at ObjectId.SchemaType.castForQuery (D:\\QR_Backend\\QR-Code\\node_modules\\mongoose\\lib\\schematype.js:1631:15)\n    at cast (D:\\QR_Backend\\QR-Code\\node_modules\\mongoose\\lib\\cast.js:375:32)\n    at model.Query.Query.cast (D:\\QR_Backend\\QR-Code\\node_modules\\mongoose\\lib\\query.js:4910:12)\n    at model.Query.Query._castConditions (D:\\QR_Backend\\QR-Code\\node_modules\\mongoose\\lib\\query.js:2232:10)\n    at model.Query._findOne (D:\\QR_Backend\\QR-Code\\node_modules\\mongoose\\lib\\query.js:2519:8)\n    at model.Query.exec (D:\\QR_Backend\\QR-Code\\node_modules\\mongoose\\lib\\query.js:4430:28)\n    at processTicksAndRejections (node:internal/process/task_queues:96:5)\n    at async Object.updatestatusbycomplaintid (D:\\QR_Backend\\QR-Code\\mongodb\\Server_Logic.js:756:29)","stringValue":"\"CU2000\"","value":"CU2000","valueType":"string"}
+info: Server is running on port 2600
+info: QR_Code_Employee MongoDB Connected
+info: Server is running on port 2600
+info: Server is running on port 2600
+info: QR_Code_Employee MongoDB Connected
+info: Server is running on port 2600
+info: QR_Code_Employee MongoDB Connected
+info: Server is running on port 2600
+info: QR_Code_Employee MongoDB Connected
+info: Server is running on port 2600
+info: Server is running on port 2600
+info: QR_Code_Employee MongoDB Connected
+info: Server is running on port 2600
+info: Server is running on port 2600
+info: QR_Code_Employee MongoDB Connected
+info: Server is running on port 2600
+info: QR_Code_Employee MongoDB Connected
+info: Server is running on port 2600
+info: QR_Code_Employee MongoDB Connected
+info: Server is running on port 2600
+info: Server is running on port 2600
+info: QR_Code_Employee MongoDB Connected
+info: Server is running on port 2600
+info: QR_Code_Employee MongoDB Connected
+info: Server is running on port 2600
+info: QR_Code_Employee MongoDB Connected
+info: Server is running on port 2600
+info: QR_Code_Employee MongoDB Connected
+info: Server is running on port 2600
+info: QR_Code_Employee MongoDB Connected
+info: Server is running on port 2600
+info: Server is running on port 2600
+info: Server is running on port 2600
+info: QR_Code_Employee MongoDB Connected
+info: Server is running on port 2600
+info: Server is running on port 2600
+info: QR_Code_Employee MongoDB Connected
