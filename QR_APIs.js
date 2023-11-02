@@ -114,15 +114,16 @@ app.get('/getcustomerById/:customerId', (req, res) => {
  app.put('/customer/:customerId', async (req, res) => {
   try {
     const { customerId } = req.params;
-    const { status } = req.body;
+    const { status } = req.body; // Destructure status and comments from the request body
 
     const updatedCustomer = Server.updateCustomerStatus(customerId, status);
-
-    if (!updatedCustomer) {
-      return res.status(404).json({ error: 'Customer not found' });
+    if (updatedCustomer) {
+      // Success: Send a success message and the updated customer data
+      res.status(200).json({ message: 'Customer updated successfully' });
+    } else {
+      // Error: Send an error message
+      res.status(404).json({ error: 'Customer not found' });
     }
-
-    res.status(200).json(updatedCustomer);
   } catch (error) {
     res.status(500).json({ error: 'Internal Server Error' });
   }

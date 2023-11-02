@@ -12,6 +12,8 @@ const customerInfoSchema = new mongoose.Schema({
   description: String,
   status: String,
   address:String,
+  // comments:String,
+  // agentStatus:String,
 });
 
 module.exports = mongoose.model('CustomerInfo', customerInfoSchema);

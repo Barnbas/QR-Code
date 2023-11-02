@@ -879,6 +879,8 @@ const createComplaint = async (req, res) => {
 
           html: `
           <h2>Welcome ${customer.firstName} </h2>
+          <h3> ${customer.customerId} Use this ID to check Status </h3>
+
           <h4>your complaint has been successfully assigned. It has been assigned to' ${agent.firstName} ${agent.lastName}'.Thank you for reaching out!'
 
 </h4>
