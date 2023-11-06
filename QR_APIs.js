@@ -160,7 +160,9 @@ app.get('/getcomplents/:complaintId', (req, res) => {
 app.get('/getDataById/:complaintId', (req, res) => {
   Server.getComplaintData(req, res, () => {});
 });
-
+app.get('/getCompleteDataById/:customerId', (req, res) => {
+  Server.getCompleteServiceData(req, res, () => {});
+});
 //get all data complaints ,customers and agents
 app.get('/getAllComplaints', (req, res) => {
   Server.getAllComplaints(req, res, () => {});

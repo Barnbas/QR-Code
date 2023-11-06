@@ -224,7 +224,6 @@ const createAgent = async (req, res) => {
       qrCode: req.body.qrCode,
       certifications: req.body.certifications || [], // Use the provided certification array or an empty array if not provided
     };
-
     const newEmployee = new Employee(Agent);
     await newEmployee.save(); // Save the new employee document to the database
     res.status(201).json(newEmployee);
@@ -305,6 +304,7 @@ const createCertificate = async (req, res) => {
   const getAllEmployees = async (req, res) => {
     try {
       const employees = await Employee.find(); // Retrieve all certificates from the database
+
       res.status(200).json(employees);
     } catch (error) {
       logger.error('Error retrieving certificates:', error);
@@ -317,12 +317,13 @@ const createCertificate = async (req, res) => {
       const { empId } = req.params; // Get the serviceType from URL parameters
   
       const employees = await Employee.find({ empId }); // Retrieve employees with the specified serviceType
-  
+
       if (!employees || employees.length === 0) {
         return res.status(404).json({ error: 'No employees found for the given serviceType' });
       }
   
       res.status(200).json(employees);
+
     } catch (error) {
       logger.error('Error retrieving employees by serviceType:', error);
       res.status(500).json({ error: 'Internal Server Error' });
@@ -540,7 +541,10 @@ const createCertificate = async (req, res) => {
   
   const getAllCustomers = async (req, res) => {
     try {
-      const customers = await CustomerInfo.find(); // Retrieve all customers from the database
+      
+      // const customers = await CustomerInfo.find(); // Retrieve all customers from the database
+      const cust = await CustomerInfo.find();
+    const customers=cust.reverse()
       res.status(200).json(customers);
     } catch (error) {
       logger.error('Error retrieving customers:', error);
@@ -585,7 +589,9 @@ const getcustomerById = async (req, res) => {
 };
 const getComplaints = async (req, res) => {
   try {
-    const complaints = await Complaint.find(); // Retrieve all Complaints from the database
+    const complaint = await Complaint.find(); // Retrieve all Complaints from the database
+    const complaints=complaint.reverse()
+
     res.status(200).json(complaints);
   } catch (error) {
     logger.error('Error retrieving complaints:', error);
@@ -655,6 +661,45 @@ const getComplaintData = async (req, res) => {
           return res.status(404).json({ error: 'Complaint not found' });
       }
 
+      // Fetch customer data based on customerId from the complaint
+      const customer = await CustomerInfo.findOne({ customerId: complaint.customerId });
+
+      if (!customer) {
+          return res.status(404).json({ error: 'Customer not found' });
+      }
+
+      // Fetch agent data based on agentId from the complaint
+      const agent = await Employee.findOne({ empId: complaint.agentId });
+
+      if (!agent) {
+          return res.status(404).json({ error: 'Agent not found' });
+      }
+
+      // Combine all the information and send it as a response
+      const response = {
+          complaint,
+          customer,
+          agent,
+      };
+
+      res.status(200).json(response);
+  } catch (error) {
+    logger.error('Error fetching complaint data:', error);
+      res.status(500).json({ error: 'Internal Server Error' });
+  }
+};
+
+const getCompleteServiceData = async (req, res) => {
+  try {
+      //const complaintId = req.params.customerId; // Assuming complaintId is in the request parameters
+
+      // Find the complaint document by complaintId
+      const complaint = await Complaint.findOne({customerId: req.params.customerId} );
+
+      if (!complaint) {
+          return res.status(404).json({ error: 'Complaint not found' });
+      }
+// console.log(complaint.customerId,"658");
       // Fetch customer data based on customerId from the complaint
       const customer = await CustomerInfo.findOne({ customerId: complaint.customerId });
 
@@ -1130,4 +1175,4 @@ function isValidEmail(email) {
 //   }
 // };
 
-module.exports = {updatestatusbycomplaintid,getComplaintDataforagent,agentotp,Verifyotp,sendotp,UserLogin,registerPost,getAllComplaints,getComplaintData,getcustomerById,getComplaints,getComplaintById,getAllEmployeesByID,createComplaint,getAllEmployeesByServiceType,sendingOtp,createAgent,createCertificate ,getAllCertificates ,getAllEmployees ,createCustomer,getAllEmployeesWithQR,getAllCustomers,updateCustomerStatus};
+module.exports = {getCompleteServiceData,updatestatusbycomplaintid,getComplaintDataforagent,agentotp,Verifyotp,sendotp,UserLogin,registerPost,getAllComplaints,getComplaintData,getcustomerById,getComplaints,getComplaintById,getAllEmployeesByID,createComplaint,getAllEmployeesByServiceType,sendingOtp,createAgent,createCertificate ,getAllCertificates ,getAllEmployees ,createCustomer,getAllEmployeesWithQR,getAllCustomers,updateCustomerStatus};
